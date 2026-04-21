@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="ForgottenWizard.com — A tribute to Nikola Tesla, the visionary genius who gave the world alternating current, the Tesla Coil, and the dream of wireless electricity. Explore his life, patents, and legacy." />
+  <meta property="og:title" content="The Forgotten Wizard — Nikola Tesla" />
+  <meta property="og:description" content="Discover the life, inventions, and forgotten legacy of Nikola Tesla — the man who illuminated the world." />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <title>The Forgotten Wizard — Nikola Tesla</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/style.css" />
+
+  <!-- Favicon inline -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23050508'/><path d='M16 4 L22 14 H18 L20 28 L10 16 H14 Z' fill='%2300b4ff' opacity='0.9'/></svg>" />
+
+  <!-- Google AdSense placeholder (replace with your publisher ID) -->
+  <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXX" crossorigin="anonymous"></script> -->
+</head>
+<body>
+
+  <!-- Global lightning canvas -->
+  <canvas id="lightning-canvas" aria-hidden="true"></canvas>
+
+  <!-- Cursor glow -->
+  <div id="cursor-glow" aria-hidden="true"></div>
+
+  <!-- ═══════════════════════════════════════
+       NAVIGATION
+  ═══════════════════════════════════════ -->
+  <nav class="nav" aria-label="Main navigation">
+    <div class="container">
+      <div class="nav__inner">
+
+        <!-- Logo -->
+        <a href="#" class="nav__logo" aria-label="ForgottenWizard Home">
+          <svg class="nav__logo-mark" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+            <rect width="36" height="36" rx="8" fill="#050508"/>
+            <path d="M18 4 L25 16 H21 L23 32 L11 18 H15 Z" fill="#00b4ff" opacity="0.95"/>
+            <circle cx="18" cy="4" r="2.5" fill="#00b4ff" opacity="0.6"/>
+          </svg>
+          <span class="nav__logo-text">ForgottenWizard</span>
+        </a>
+
+        <!-- Desktop links -->
+        <ul class="nav__links" role="list">
+          <li><a href="#facts">Facts</a></li>
+          <li><a href="#timeline">Timeline</a></li>
+          <li><a href="#patents">Patents</a></li>
+          <li><a href="#quotes">Quotes</a></li>
+          <li><a href="#support">Support</a></li>
+          <li><a href="#newsletter" class="nav__cta">Join the Lab</a></li>
+        </ul>
+
+        <!-- Hamburger -->
+        <button class="nav__hamburger" aria-label="Open menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+
+      </div>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════════════════════
+       HERO
+  ═══════════════════════════════════════ -->
+  <section class="hero" id="home" aria-labelledby="hero-title">
+    <div class="hero__bg-grid" aria-hidden="true"></div>
+    <div class="hero__orb hero__orb--1" aria-hidden="true"></div>
+    <div class="hero__orb hero__orb--2" aria-hidden="true"></div>
+    <div class="hero__orb hero__orb--3" aria-hidden="true"></div>
+
+    <div class="container" style="position:relative;z-index:2;">
+
+      <!-- Mini Tesla coil canvas -->
+      <div class="hero__coil-container" aria-hidden="true">
+        <canvas id="hero-coil-canvas" width="280" height="280"></canvas>
+      </div>
+
+      <p class="hero__eyebrow">1856 — 1943 · Serbian-American Inventor</p>
+
+      <h1 class="hero__title" id="hero-title">
+        The<br>
+        <span>Forgotten</span><br>
+        Wizard
+      </h1>
+
+      <p class="hero__sub">
+        He gave the world alternating current, the Tesla coil, and wireless electricity.
+        History forgot him. We remember.
+      </p>
+
+      <div class="hero__btns">
+        <a href="#facts" class="btn btn--primary">Explore His Legacy ⚡</a>
+        <a href="#patents" class="btn btn--outline">View All Patents</a>
+      </div>
+    </div>
+
+    <div class="hero__scroll" aria-hidden="true">
+      <span>Scroll</span>
+      <div class="hero__scroll-bar"></div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       STATS BAR
+  ═══════════════════════════════════════ -->
+  <div class="stats-bar" aria-label="Key statistics about Nikola Tesla">
+    <div class="container">
+      <div class="stats-grid">
+        <div class="stat fade-in">
+          <span class="stat__number" data-count="278" data-suffix="+">0</span>
+          <span class="stat__label">Patents Worldwide</span>
+        </div>
+        <div class="stat fade-in">
+          <span class="stat__number" data-count="26" data-suffix="">0</span>
+          <span class="stat__label">Countries</span>
+        </div>
+        <div class="stat fade-in">
+          <span class="stat__number" data-count="86" data-suffix=" yrs">0</span>
+          <span class="stat__label">Life Lived</span>
+        </div>
+        <div class="stat fade-in">
+          <span class="stat__number" data-count="135" data-suffix="ft">0</span>
+          <span class="stat__label">Lightning Created</span>
+        </div>
+        <div class="stat fade-in">
+          <span class="stat__number" data-count="200" data-suffix="">0</span>
+          <span class="stat__label">Wireless Lamps Lit</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       FACTS
+  ═══════════════════════════════════════ -->
+  <section class="facts" id="facts" aria-labelledby="facts-title">
+    <div class="container">
+      <header class="facts__header">
+        <span class="section-label">The Genius</span>
+        <h2 class="section-title" id="facts-title">Who Was Nikola Tesla?</h2>
+        <p class="section-desc">Born July 10, 1856 in Smiljan (modern-day Croatia), Tesla was a visionary decades ahead of his time — most of his ideas are only now being realized.</p>
+      </header>
+
+      <div class="facts-grid">
+
+        <article class="fact-card fade-in">
+          <span class="fact-card__number">01</span>
+          <div class="fact-card__icon">⚡</div>
+          <h3 class="fact-card__title">Father of AC Current</h3>
+          <p class="fact-card__text">Tesla invented the alternating current (AC) electrical supply system — the very electricity running through your walls right now. His system won the "War of Currents" against Edison's inferior DC system and powers the modern world.</p>
+        </article>
+
+        <article class="fact-card fade-in">
+          <span class="fact-card__number">02</span>
+          <div class="fact-card__icon">🌀</div>
+          <h3 class="fact-card__title">The Tesla Coil (1891)</h3>
+          <p class="fact-card__text">In 1891, Tesla invented the resonant transformer circuit that bears his name. The Tesla Coil produces high-voltage, high-frequency alternating current — still used in radio technology, spark plugs, and entertainment to this day.</p>
+        </article>
+
+        <article class="fact-card fade-in">
+          <span class="fact-card__number">03</span>
+          <div class="fact-card__icon">📡</div>
+          <h3 class="fact-card__title">Wireless Electricity</h3>
+          <p class="fact-card__text">In Colorado Springs (1899), Tesla lit 200 lamps wirelessly from 25 miles away using Earth itself as a conductor. His Wardenclyffe Tower project aimed to transmit free electricity across the globe — a dream J.P. Morgan shut down by cutting funding.</p>
+        </article>
+
+        <article class="fact-card fade-in">
+          <span class="fact-card__number">04</span>
+          <div class="fact-card__icon">📻</div>
+          <h3 class="fact-card__title">True Father of Radio</h3>
+          <p class="fact-card__text">Tesla demonstrated radio transmission in 1893 — two years before Marconi. The U.S. Supreme Court confirmed in 1943 that Tesla's patents predated Marconi's, yet Marconi received the Nobel Prize. History misattributed the invention for decades.</p>
+        </article>
+
+        <article class="fact-card fade-in">
+          <span class="fact-card__number">05</span>
+          <div class="fact-card__icon">🤖</div>
+          <h3 class="fact-card__title">First Remote Control</h3>
+          <p class="fact-card__text">In 1898 at Madison Square Garden, Tesla demonstrated the world's first radio-controlled vehicle — a miniature boat he called a "teleautomaton." The crowd thought it was magic. He had invented remote control 125 years before smart home devices.</p>
+        </article>
+
+        <article class="fact-card fade-in">
+          <span class="fact-card__number">06</span>
+          <div class="fact-card__icon">💡</div>
+          <h3 class="fact-card__title">Niagara Falls Harnessed</h3>
+          <p class="fact-card__text">Tesla designed the first hydroelectric power plant at Niagara Falls in 1896 — the first large-scale AC electric generating station. It powered Buffalo, NY and proved that AC could deliver electricity across long distances, changing civilization forever.</p>
+        </article>
+
+        <article class="fact-card fade-in">
+          <span class="fact-card__number">07</span>
+          <div class="fact-card__icon">🌩️</div>
+          <h3 class="fact-card__title">Man-Made Lightning</h3>
+          <p class="fact-card__text">At his Colorado Springs lab, Tesla created artificial lightning bolts measuring 135 feet long — the largest man-made lightning ever produced. The discharges could be heard 15 miles away. He photographed himself reading serenely among the arcs.</p>
+        </article>
+
+        <article class="fact-card fade-in">
+          <span class="fact-card__number">08</span>
+          <div class="fact-card__icon">🔬</div>
+          <h3 class="fact-card__title">X-Ray Pioneer</h3>
+          <p class="fact-card__text">Tesla experimented with X-rays before Röntgen's famous announcement, producing high-energy X-ray photographs. He warned of their dangers and nearly had the "Shadowgraph" technology ready — but his lab burned down, destroying years of research.</p>
+        </article>
+
+        <article class="fact-card fade-in">
+          <span class="fact-card__number">09</span>
+          <div class="fact-card__icon">🕊️</div>
+          <h3 class="fact-card__title">A Man Ahead of Time</h3>
+          <p class="fact-card__text">Tesla predicted smartphones, the internet, drones, and wireless energy a century before they existed. He envisioned a "World Wireless System" that would give every person on Earth free access to power and communication — essentially what we call the internet today.</p>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       TIMELINE
+  ═══════════════════════════════════════ -->
+  <section class="timeline" id="timeline" aria-labelledby="timeline-title">
+    <div class="container">
+      <header class="timeline__header">
+        <span class="section-label">His Journey</span>
+        <h2 class="section-title" id="timeline-title">Life & Milestones</h2>
+        <p class="section-desc">From a small village in Croatia to the towers of New York — a life of electrifying breakthroughs.</p>
+      </header>
+
+      <ol class="timeline__track" role="list">
+
+        <li class="timeline-item fade-in">
+          <time class="timeline-item__year" datetime="1856">1856</time>
+          <h3 class="timeline-item__event">Born in Smiljan, Austrian Empire</h3>
+          <p class="timeline-item__desc">Nikola Tesla is born on July 10 during a lightning storm, in the village of Smiljan (modern-day Croatia). A midwife called him "a child of the storm."</p>
+        </li>
+
+        <li class="timeline-item fade-in">
+          <time class="timeline-item__year" datetime="1882">1882</time>
+          <h3 class="timeline-item__event">AC Motor Conceived</h3>
+          <p class="timeline-item__desc">While walking in a Budapest park, Tesla has a vision of a rotating magnetic field — the principle behind the AC motor. He sketches it in the dirt with a stick.</p>
+        </li>
+
+        <li class="timeline-item fade-in">
+          <time class="timeline-item__year" datetime="1884">1884</time>
+          <h3 class="timeline-item__event">Arrives in America</h3>
+          <p class="timeline-item__desc">Tesla arrives in New York with four cents in his pocket, a letter of introduction to Thomas Edison, and a mind full of revolutionary ideas. He begins working at Edison's lab — but they soon clash philosophically.</p>
+        </li>
+
+        <li class="timeline-item fade-in">
+          <time class="timeline-item__year" datetime="1888">1888</time>
+          <h3 class="timeline-item__event">AC Patents — Westinghouse Deal</h3>
+          <p class="timeline-item__desc">Tesla sells his AC motor and transformer patents to George Westinghouse for $60,000 — then later tears up his royalty contract to save Westinghouse from bankruptcy, forfeiting billions in future earnings.</p>
+        </li>
+
+        <li class="timeline-item fade-in">
+          <time class="timeline-item__year" datetime="1891">1891</time>
+          <h3 class="timeline-item__event">Tesla Coil Invented · US Citizenship</h3>
+          <p class="timeline-item__desc">Tesla patents the Tesla Coil and becomes an American citizen. He performs spectacular demonstrations, shooting lightning through his own body to light bulbs wirelessly, astonishing audiences worldwide.</p>
+        </li>
+
+        <li class="timeline-item fade-in">
+          <time class="timeline-item__year" datetime="1893">1893</time>
+          <h3 class="timeline-item__event">Chicago World's Fair — AC Lights the World</h3>
+          <p class="timeline-item__desc">Tesla and Westinghouse win the contract to power the Chicago World's Fair with AC electricity, illuminating 100,000 incandescent lamps. The display settles the War of Currents in Tesla's favor forever.</p>
+        </li>
+
+        <li class="timeline-item fade-in">
+          <time class="timeline-item__year" datetime="1896">1896</time>
+          <h3 class="timeline-item__event">Niagara Falls Hydroelectric Plant</h3>
+          <p class="timeline-item__desc">Tesla's AC system powers the first industrial-scale hydroelectric plant at Niagara Falls, transmitting electricity to Buffalo, NY — 22 miles away. It's the birth of the modern power grid.</p>
+        </li>
+
+        <li class="timeline-item fade-in">
+          <time class="timeline-item__year" datetime="1898">1898</time>
+          <h3 class="timeline-item__event">World's First Remote Control</h3>
+          <p class="timeline-item__desc">Tesla demonstrates a radio-controlled boat at Madison Square Garden, astonishing onlookers. He envisions radio-controlled torpedoes and autonomous machines — a century before robotics became mainstream.</p>
+        </li>
+
+        <li class="timeline-item fade-in">
+          <time class="timeline-item__year" datetime="1899">1899</time>
+          <h3 class="timeline-item__event">Colorado Springs — Earth Resonance</h3>
+          <p class="timeline-item__desc">Tesla sets up a laboratory in Colorado Springs and makes what he considers his greatest discovery: that Earth itself can act as an electrical conductor. He creates lightning 135 feet long and lights 200 lamps 25 miles away wirelessly.</p>
+        </li>
+
+        <li class="timeline-item fade-in">
+          <time class="timeline-item__year" datetime="1901">1901</time>
+          <h3 class="timeline-item__event">Wardenclyffe Tower — The Dream</h3>
+          <p class="timeline-item__desc">With J.P. Morgan's funding, Tesla begins constructing a 187-foot tower on Long Island designed to transmit wireless electricity and communications globally. When Morgan discovers the system would provide free power to anyone, he pulls the funding.</p>
+        </li>
+
+        <li class="timeline-item fade-in">
+          <time class="timeline-item__year" datetime="1915">1915</time>
+          <h3 class="timeline-item__event">Nobel Prize Snub</h3>
+          <p class="timeline-item__desc">Rumors spread that Tesla and Edison will share the Nobel Prize. Neither receives it. Tesla, broke and exhausted, is living at the Hotel New Yorker, feeding pigeons daily — particularly one white pigeon he considers his closest companion.</p>
+        </li>
+
+        <li class="timeline-item fade-in">
+          <time class="timeline-item__year" datetime="1943">1943</time>
+          <h3 class="timeline-item__event">Death — Legacy Begins</h3>
+          <p class="timeline-item__desc">Tesla dies alone in his hotel room on January 7, age 86. The U.S. Supreme Court later confirms his radio patents predated Marconi. The FBI confiscates his papers. He dies broke — yet his inventions power every home, every device, and every city on Earth.</p>
+        </li>
+
+      </ol>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       PATENTS
+  ═══════════════════════════════════════ -->
+  <section class="patents" id="patents" aria-labelledby="patents-title">
+    <div class="container">
+      <header class="patents__header">
+        <span class="section-label">Intellectual Legacy</span>
+        <h2 class="section-title" id="patents-title">His Patents</h2>
+        <p class="section-desc">Tesla was granted 278+ patents across 26 countries. Here are some of his most significant U.S. patents — each one a spark that changed civilization.</p>
+      </header>
+
+      <div class="patents-grid">
+
+        <article class="patent-card fade-in">
+          <p class="patent-card__num">US Patent 381,968</p>
+          <h3 class="patent-card__title">Electro Magnetic Motor</h3>
+          <p class="patent-card__year">May 1, 1888 — The rotating magnetic field principle powering nearly every AC motor on Earth.</p>
+        </article>
+
+        <article class="patent-card fade-in">
+          <p class="patent-card__num">US Patent 382,280</p>
+          <h3 class="patent-card__title">Electrical Transmission of Power</h3>
+          <p class="patent-card__year">May 1, 1888 — Long-distance AC power delivery system.</p>
+        </article>
+
+        <article class="patent-card fade-in">
+          <p class="patent-card__num">US Patent 390,721</p>
+          <h3 class="patent-card__title">Dynamo Electric Machine</h3>
+          <p class="patent-card__year">October 9, 1888 — Efficient AC generator design.</p>
+        </article>
+
+        <article class="patent-card fade-in">
+          <p class="patent-card__num">US Patent 447,921</p>
+          <h3 class="patent-card__title">Alternating Electric Current Generator</h3>
+          <p class="patent-card__year">March 10, 1891 — Foundation of modern power generation.</p>
+        </article>
+
+        <article class="patent-card fade-in">
+          <p class="patent-card__num">US Patent 454,622</p>
+          <h3 class="patent-card__title">System of Electric Lighting</h3>
+          <p class="patent-card__year">June 23, 1891 — Fluorescent lamps powered without wires.</p>
+        </article>
+
+        <article class="patent-card fade-in">
+          <p class="patent-card__num">US Patent 568,176</p>
+          <h3 class="patent-card__title">High Frequency Electrical Apparatus</h3>
+          <p class="patent-card__year">September 22, 1896 — Core Tesla Coil technology.</p>
+        </article>
+
+        <article class="patent-card fade-in">
+          <p class="patent-card__num">US Patent 577,670</p>
+          <h3 class="patent-card__title">Apparatus for Producing High Frequency Currents</h3>
+          <p class="patent-card__year">February 23, 1897 — Resonance transformer improvements.</p>
+        </article>
+
+        <article class="patent-card fade-in">
+          <p class="patent-card__num">US Patent 613,809</p>
+          <h3 class="patent-card__title">Remote Control — Moving Vessels</h3>
+          <p class="patent-card__year">November 8, 1898 — The world's first remote controlled vehicle patent.</p>
+        </article>
+
+        <article class="patent-card fade-in">
+          <p class="patent-card__num">US Patent 645,576</p>
+          <h3 class="patent-card__title">System of Transmission of Electrical Energy</h3>
+          <p class="patent-card__year">March 20, 1900 — Wireless power transmission system.</p>
+        </article>
+
+        <article class="patent-card fade-in">
+          <p class="patent-card__num">US Patent 685,957</p>
+          <h3 class="patent-card__title">Apparatus for Utilizing Radiant Energy</h3>
+          <p class="patent-card__year">November 5, 1901 — Capturing energy from the atmosphere.</p>
+        </article>
+
+        <article class="patent-card fade-in">
+          <p class="patent-card__num">US Patent 685,958</p>
+          <h3 class="patent-card__title">Method of Utilizing Radiant Energy</h3>
+          <p class="patent-card__year">November 5, 1901 — Solar energy conversion predecessor.</p>
+        </article>
+
+        <article class="patent-card fade-in">
+          <p class="patent-card__num">US Patent 723,188</p>
+          <h3 class="patent-card__title">Method of Signaling</h3>
+          <p class="patent-card__year">March 17, 1903 — Wireless communication foundation (predates Marconi).</p>
+        </article>
+
+        <article class="patent-card fade-in">
+          <p class="patent-card__num">US Patent 787,412</p>
+          <h3 class="patent-card__title">Art of Transmitting Electrical Energy</h3>
+          <p class="patent-card__year">April 18, 1905 — Earth-resonance power transmission.</p>
+        </article>
+
+        <article class="patent-card fade-in">
+          <p class="patent-card__num">US Patent 1,061,206</p>
+          <h3 class="patent-card__title">Turbine</h3>
+          <p class="patent-card__year">May 6, 1913 — Bladeless Tesla Turbine using viscous flow.</p>
+        </article>
+
+        <article class="patent-card fade-in">
+          <p class="patent-card__num">US Patent 1,329,559</p>
+          <h3 class="patent-card__title">Valvular Conduit</h3>
+          <p class="patent-card__year">February 3, 1920 — The Tesla Valve — a one-way valve with no moving parts.</p>
+        </article>
+
+        <article class="patent-card fade-in">
+          <p class="patent-card__num">US Patent 1,655,114</p>
+          <h3 class="patent-card__title">Apparatus for Aerial Transportation</h3>
+          <p class="patent-card__year">January 3, 1928 — A VTOL aircraft concept — predating modern drones by a century.</p>
+        </article>
+
+      </div>
+
+      <p class="patents__more fade-in">
+        Full patent archive available at <a href="https://teslauniverse.com/nikola-tesla/patents" target="_blank" rel="noopener">Tesla Universe</a> and <a href="https://web.mit.edu/most/Public/Tesla1/alpha_tesla.html" target="_blank" rel="noopener">MIT's Complete Collection</a>. All 278+ patents across 26 countries.
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       QUOTE ROTATOR
+  ═══════════════════════════════════════ -->
+  <section class="quote-section" id="quotes" aria-labelledby="quote-title">
+    <div class="container container--narrow">
+      <div class="quote__mark" aria-hidden="true">"</div>
+      <h2 class="sr-only" id="quote-title">Nikola Tesla Quotes</h2>
+      <blockquote>
+        <p class="quote__text" id="quote-text"></p>
+        <footer class="quote__attr">— Nikola Tesla</footer>
+      </blockquote>
+      <nav class="quote__dots" aria-label="Quote navigation">
+        <button class="quote__dot active" aria-label="Quote 1"></button>
+        <button class="quote__dot" aria-label="Quote 2"></button>
+        <button class="quote__dot" aria-label="Quote 3"></button>
+        <button class="quote__dot" aria-label="Quote 4"></button>
+        <button class="quote__dot" aria-label="Quote 5"></button>
+      </nav>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       MERCH / SHOP
+  ═══════════════════════════════════════ -->
+  <section class="merch" id="shop" aria-labelledby="merch-title">
+    <div class="container">
+      <header class="merch__header">
+        <span class="section-label">Tesla Store</span>
+        <h2 class="section-title" id="merch-title">Carry the Spark</h2>
+        <p class="section-desc">Wear the legacy. Quality Tesla-inspired gear for true believers in the forgotten genius.</p>
+      </header>
+
+      <div class="merch-grid">
+
+        <div class="merch-card fade-in">
+          <div class="merch-card__img" aria-hidden="true">⚡</div>
+          <div class="merch-card__body">
+            <h3 class="merch-card__title">Tesla Coil Tee</h3>
+            <p class="merch-card__price">$28</p>
+            <a href="#newsletter" class="merch-card__cta">Notify Me</a>
+          </div>
+        </div>
+
+        <div class="merch-card fade-in">
+          <div class="merch-card__img" aria-hidden="true">🌀</div>
+          <div class="merch-card__body">
+            <h3 class="merch-card__title">Wardenclyffe Poster</h3>
+            <p class="merch-card__price">$22</p>
+            <a href="#newsletter" class="merch-card__cta">Notify Me</a>
+          </div>
+        </div>
+
+        <div class="merch-card fade-in">
+          <div class="merch-card__img" aria-hidden="true">🔬</div>
+          <div class="merch-card__body">
+            <h3 class="merch-card__title">Patent Blueprint Print</h3>
+            <p class="merch-card__price">$35</p>
+            <a href="#newsletter" class="merch-card__cta">Notify Me</a>
+          </div>
+        </div>
+
+        <div class="merch-card fade-in">
+          <div class="merch-card__img" aria-hidden="true">☕</div>
+          <div class="merch-card__body">
+            <h3 class="merch-card__title">"3, 6, 9" Mug</h3>
+            <p class="merch-card__price">$18</p>
+            <a href="#newsletter" class="merch-card__cta">Notify Me</a>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Affiliate Banner -->
+      <div class="affiliate-bar fade-in">
+        <p class="affiliate-bar__label">Recommended · Affiliate Partner</p>
+        <h3 class="affiliate-bar__title">Explore Tesla Books & Documentaries</h3>
+        <p class="affiliate-bar__text">Dive deeper into Tesla's world with the best biographies, documentaries, and science books on his life and inventions.</p>
+        <a href="https://www.amazon.com/s?k=nikola+tesla+biography&tag=forgottenwizard-20" target="_blank" rel="noopener sponsored" class="btn btn--outline" style="display:inline-flex;">Browse on Amazon ↗</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       SUPPORT / MONETIZATION
+  ═══════════════════════════════════════ -->
+  <section class="support" id="support" aria-labelledby="support-title">
+    <div class="container">
+      <header class="support__header">
+        <span class="section-label">Keep the Vision Alive</span>
+        <h2 class="section-title" id="support-title">Support the Mission</h2>
+        <p class="section-desc">Tesla gave his royalties away. We're asking for just a little back — to keep his story alive for the next generation.</p>
+      </header>
+
+      <div class="support-grid">
+
+        <div class="support-card fade-in">
+          <div class="support-card__icon">☕</div>
+          <h3 class="support-card__title">Buy a Coffee</h3>
+          <p class="support-card__desc">A one-time contribution to fuel more research, new content, and keeping this archive free for everyone.</p>
+          <div class="support-card__price">$5 <span>one-time</span></div>
+          <a href="https://ko-fi.com" target="_blank" rel="noopener" class="btn btn--outline" style="display:block;text-align:center;">Support on Ko-fi</a>
+        </div>
+
+        <div class="support-card support-card--featured fade-in">
+          <div class="support-card__icon">⚡</div>
+          <h3 class="support-card__title">Tesla Patron</h3>
+          <p class="support-card__desc">Monthly support to keep the archive growing. Get your name in the Patron's Hall of Fame and early access to new content.</p>
+          <div class="support-card__price">$5 <span>/ month</span></div>
+          <a href="https://patreon.com" target="_blank" rel="noopener" class="btn btn--primary" style="display:block;text-align:center;">Join on Patreon</a>
+        </div>
+
+        <div class="support-card fade-in">
+          <div class="support-card__icon">🏛️</div>
+          <h3 class="support-card__title">Sponsor a Page</h3>
+          <p class="support-card__desc">Brand sponsorship opportunities available. Reach a passionate audience of science lovers, engineers, and history buffs.</p>
+          <div class="support-card__price">Custom</div>
+          <a href="mailto:nick@webguynick.com" class="btn btn--outline" style="display:block;text-align:center;">Get in Touch</a>
+        </div>
+
+      </div>
+
+      <!-- Newsletter -->
+      <div class="newsletter fade-in" id="newsletter">
+        <h3 class="newsletter__title">Join Tesla's Laboratory</h3>
+        <p class="newsletter__sub">Get rare Tesla facts, new patent discoveries, and early access to new features — delivered free to your inbox.</p>
+        <form class="newsletter__form" aria-label="Newsletter signup">
+          <label for="email-input" class="sr-only">Email address</label>
+          <input
+            type="email"
+            id="email-input"
+            class="newsletter__input"
+            placeholder="your@email.com"
+            required
+            autocomplete="email"
+          />
+          <button type="submit" class="btn btn--primary">Subscribe ⚡</button>
+        </form>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════ -->
+  <footer>
+    <div class="container">
+
+      <div class="footer__inner">
+        <div>
+          <div class="footer__brand">
+            <svg width="28" height="28" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+              <rect width="36" height="36" rx="8" fill="#050508"/>
+              <path d="M18 4 L25 16 H21 L23 32 L11 18 H15 Z" fill="#00b4ff" opacity="0.95"/>
+            </svg>
+            <span class="footer__brand-text">ForgottenWizard.com</span>
+          </div>
+          <p class="footer__tagline">A tribute to Nikola Tesla — the visionary who illuminated the world and was forgotten by it. His genius lives on in every outlet, every radio wave, every wireless signal.</p>
+        </div>
+
+        <nav class="footer__links" aria-label="Footer navigation">
+          <a href="#facts">Facts</a>
+          <a href="#timeline">Timeline</a>
+          <a href="#patents">Patents</a>
+          <a href="#quotes">Quotes</a>
+          <a href="#support">Support</a>
+          <a href="mailto:nick@webguynick.com">Contact</a>
+          <a href="#" onclick="return false;">Privacy Policy</a>
+        </nav>
+      </div>
+
+      <div class="footer__bottom">
+        <p class="footer__copy">
+          &copy; 2026 ForgottenWizard.com · Built with ⚡ by <a href="https://webguynick.com" target="_blank" rel="noopener">WebGuyNick</a> · All patent info sourced from <a href="https://en.wikipedia.org/wiki/List_of_Nikola_Tesla_patents" target="_blank" rel="noopener">public domain records</a>.
+        </p>
+        <div class="footer__social" aria-label="Social media links">
+          <a href="https://youtube.com/@crazycatvid" target="_blank" rel="noopener" aria-label="YouTube">YT</a>
+          <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
+          <a href="https://twitter.com" target="_blank" rel="noopener" aria-label="Twitter / X">X</a>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- ═══════════════════════════════════════
+       SCRIPTS
+  ═══════════════════════════════════════ -->
+  <script src="js/lightning.js"></script>
+  <script src="js/main.js"></script>
+
+</body>
+</html>
