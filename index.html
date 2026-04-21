@@ -3,12 +3,60 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ═══ SECURITY HEADERS ═══ -->
+  <!-- Content Security Policy: restrict resource origins -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://pagead2.googlesyndication.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self'; frame-src https://www.youtube.com; object-src 'none'; base-uri 'self'; form-action 'self';" />
+  <!-- Prevent clickjacking -->
+  <meta http-equiv="X-Frame-Options" content="SAMEORIGIN" />
+  <!-- Prevent MIME sniffing -->
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <!-- Referrer policy -->
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <!-- Permissions policy: limit browser features -->
+  <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=()" />
+
+  <!-- ═══ SEO ═══ -->
   <meta name="description" content="ForgottenWizard.com — A tribute to Nikola Tesla, the visionary genius who gave the world alternating current, the Tesla Coil, and the dream of wireless electricity. Explore his life, patents, and legacy." />
+  <meta name="robots" content="index, follow" />
+  <meta name="author" content="ForgottenWizard.com" />
+  <meta name="keywords" content="Nikola Tesla, Tesla Coil, alternating current, AC motor, Wardenclyffe Tower, Tesla patents, Tesla biography, wireless electricity, Tesla inventions" />
+  <link rel="canonical" href="https://www.forgottenwizard.com/" />
+
+  <!-- ═══ OPEN GRAPH ═══ -->
   <meta property="og:title" content="The Forgotten Wizard — Nikola Tesla" />
   <meta property="og:description" content="Discover the life, inventions, and forgotten legacy of Nikola Tesla — the man who illuminated the world." />
   <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.forgottenwizard.com/" />
+  <meta property="og:site_name" content="ForgottenWizard.com" />
   <meta name="twitter:card" content="summary_large_image" />
-  <title>The Forgotten Wizard — Nikola Tesla</title>
+  <meta name="twitter:title" content="The Forgotten Wizard — Nikola Tesla" />
+  <meta name="twitter:description" content="The forgotten genius who lit the world. Explore Tesla's inventions, patents, and legacy." />
+
+  <!-- ═══ STRUCTURED DATA ═══ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "The Forgotten Wizard — Nikola Tesla",
+    "url": "https://www.forgottenwizard.com",
+    "description": "A comprehensive tribute to Nikola Tesla — inventor, engineer, and visionary genius.",
+    "about": {
+      "@type": "Person",
+      "name": "Nikola Tesla",
+      "birthDate": "1856-07-10",
+      "deathDate": "1943-01-07",
+      "nationality": "Serbian-American",
+      "jobTitle": "Inventor, Electrical Engineer, Physicist",
+      "sameAs": [
+        "https://en.wikipedia.org/wiki/Nikola_Tesla",
+        "https://www.britannica.com/biography/Nikola-Tesla"
+      ]
+    }
+  }
+  </script>
+
+  <title>The Forgotten Wizard — Nikola Tesla | ForgottenWizard.com</title>
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -32,6 +80,9 @@
   <!-- Cursor glow -->
   <div id="cursor-glow" aria-hidden="true"></div>
 
+  <!-- Scroll progress bar -->
+  <div id="scroll-progress" aria-hidden="true"></div>
+
   <!-- ═══════════════════════════════════════
        NAVIGATION
   ═══════════════════════════════════════ -->
@@ -54,7 +105,7 @@
           <li><a href="#facts">Facts</a></li>
           <li><a href="#timeline">Timeline</a></li>
           <li><a href="#patents">Patents</a></li>
-          <li><a href="#quotes">Quotes</a></li>
+          <li><a href="#lab">Lab Game</a></li>
           <li><a href="#support">Resources</a></li>
           <li><a href="#newsletter" class="nav__cta">Join the Lab</a></li>
         </ul>
@@ -87,9 +138,9 @@
       <p class="hero__eyebrow">1856 — 1943 · Serbian-American Inventor</p>
 
       <h1 class="hero__title" id="hero-title">
-        The<br>
-        <span>Forgotten</span><br>
-        Wizard
+        <span class="hero__title-line hero__title-line--plain">The</span>
+        <span class="hero__title-line hero__title-line--gradient">Forgotten</span>
+        <span class="hero__title-line hero__title-line--plain">Wizard</span>
       </h1>
 
       <p class="hero__sub">
@@ -447,62 +498,368 @@
   </section>
 
   <!-- ═══════════════════════════════════════
-       MERCH / SHOP
+       DEEP DIVES — Expanded Stories
   ═══════════════════════════════════════ -->
-  <section class="merch" id="shop" aria-labelledby="merch-title">
+  <section class="deep-dives" id="deep-dives" aria-labelledby="deep-dives-title">
     <div class="container">
-      <header class="merch__header">
-        <span class="section-label">Tesla Store</span>
-        <h2 class="section-title" id="merch-title">Carry the Spark</h2>
-        <p class="section-desc">Wear the legacy. Quality Tesla-inspired gear for true believers in the forgotten genius.</p>
+      <header class="deep-dives__header">
+        <span class="section-label">Untold Stories</span>
+        <h2 class="section-title" id="deep-dives-title">Beyond the History Books</h2>
+        <p class="section-desc">The stories they left out of your textbook. These are the chapters that explain why Tesla truly was the most extraordinary mind of the modern era.</p>
       </header>
 
-      <div class="merch-grid">
+      <!-- Feature story 1: Death Ray -->
+      <article class="feature-story fade-in">
+        <div class="feature-story__tag">Classified File</div>
+        <div class="feature-story__grid">
+          <div class="feature-story__visual">
+            <div class="feature-story__icon-box">
+              <span class="feature-story__big-icon" aria-hidden="true">🔫</span>
+              <div class="feature-story__icon-ring"></div>
+            </div>
+          </div>
+          <div class="feature-story__content">
+            <h3 class="feature-story__title">The Death Ray — Tesla's Most Dangerous Secret</h3>
+            <p>On July 11, 1934 — his 78th birthday — Tesla called a press conference and announced something that shocked the world: he had invented a particle beam weapon capable of destroying 10,000 aircraft from 250 miles away.</p>
+            <p>He called it <strong>Teleforce</strong>. The press called it the <em>Death Ray</em>.</p>
+            <p>The beam would fire electrically charged particles of tungsten or mercury at 270,000 miles per hour — with 100 billion watts packed into an area smaller than a human hair. Tesla's vision was actually defensive: a ring of these weapons around a nation's coast would make war "impossible" by guaranteeing mutual destruction before any army could mobilize.</p>
+            <p>He pitched the invention to the U.S. government, the British, the French — and was turned down each time. In 1939, the Soviet government paid him $25,000 to investigate the weapon. When Tesla died in 1943, the FBI seized all his papers and placed them under military secrecy. The contents were never fully disclosed.</p>
+            <blockquote class="feature-story__pullquote">
+              &ldquo;It is not a dream, it is a simple feat of scientific electrical engineering, only expensive — blind, faint-hearted, doubting world!&rdquo;
+              <cite>— Nikola Tesla</cite>
+            </blockquote>
+            <div class="feature-story__tags">
+              <span class="ftag">Teleforce</span>
+              <span class="ftag">1934</span>
+              <span class="ftag">Classified</span>
+              <span class="ftag">FBI Seizure</span>
+            </div>
+          </div>
+        </div>
+      </article>
 
-        <div class="merch-card fade-in">
-          <div class="merch-card__img" aria-hidden="true">⚡</div>
-          <div class="merch-card__body">
-            <h3 class="merch-card__title">Tesla Coil Tee</h3>
-            <p class="merch-card__price">$28</p>
-            <a href="#newsletter" class="merch-card__cta">Notify Me</a>
+      <!-- Feature story 2: Tesla vs Edison -->
+      <article class="feature-story feature-story--reverse fade-in">
+        <div class="feature-story__tag feature-story__tag--gold">War of Currents</div>
+        <div class="feature-story__grid">
+          <div class="feature-story__visual">
+            <div class="feature-story__icon-box feature-story__icon-box--gold">
+              <span class="feature-story__big-icon" aria-hidden="true">⚡</span>
+              <div class="feature-story__icon-ring feature-story__icon-ring--gold"></div>
+            </div>
+          </div>
+          <div class="feature-story__content">
+            <h3 class="feature-story__title">Tesla vs. Edison — The War That Lit the World</h3>
+            <p>When Tesla arrived at Edison's lab in 1884, Edison told him that anyone who could redesign his DC motors would earn a $50,000 bonus. Tesla did it — and Edison laughed, saying it was "just an American joke." Tesla quit on the spot.</p>
+            <p>What followed was one of history's greatest rivalries. Edison had bet everything on Direct Current (DC) and spent years running a vicious smear campaign against Tesla's Alternating Current (AC). He publicly electrocuted animals — including Topsy the elephant — with AC power to make it look dangerous.</p>
+            <p>Tesla partnered with George Westinghouse and fought back with science. The decisive moment came at the 1893 Chicago World's Fair, where Tesla and Westinghouse lit 100,000 bulbs with AC — the first time most Americans had ever seen electric light. The War of Currents was over.</p>
+            <p>Edison never admitted defeat. In his final autobiography, he claimed his biggest regret was never pursuing AC. Tesla, for his part, tore up his royalty contract with Westinghouse to save the company from bankruptcy — forfeiting what would have been billions of dollars.</p>
+            <div class="versus-bar">
+              <div class="versus-bar__side versus-bar__side--tesla">
+                <strong>Tesla (AC)</strong>
+                <span>Efficient over long distances</span>
+                <span>Powers the modern world</span>
+                <span>Won the War of Currents</span>
+              </div>
+              <div class="versus-bar__divider">VS</div>
+              <div class="versus-bar__side versus-bar__side--edison">
+                <strong>Edison (DC)</strong>
+                <span>Short-range only</span>
+                <span>Required a power plant every mile</span>
+                <span>Used fear tactics</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Feature story 3: The Pigeon -->
+      <article class="feature-story fade-in">
+        <div class="feature-story__tag feature-story__tag--violet">The Human Side</div>
+        <div class="feature-story__grid">
+          <div class="feature-story__visual">
+            <div class="feature-story__icon-box feature-story__icon-box--violet">
+              <span class="feature-story__big-icon" aria-hidden="true">🕊️</span>
+              <div class="feature-story__icon-ring feature-story__icon-ring--violet"></div>
+            </div>
+          </div>
+          <div class="feature-story__content">
+            <h3 class="feature-story__title">The Genius and the Pigeon</h3>
+            <p>In his final years, Tesla lived alone in room 3327 of the Hotel New Yorker. Broke, forgotten, and in poor health, he spent his days feeding pigeons in Bryant Park. But there was one pigeon — a white female — that he loved above all others.</p>
+            <p>"I have been feeding pigeons, thousands of them, for years," Tesla wrote. "But there was one pigeon, a beautiful bird, pure white with light grey tips on its wings… that pigeon was the joy of my life."</p>
+            <p>He nursed her back to health when she was injured, spending $2,000 (a fortune for a man with no money) on veterinary care. He believed they had a special connection. When she died, Tesla said: "When that pigeon died, something went out of my life… I knew that my life's work was finished."</p>
+            <p>The man who had electrified the world spent his last years in near total isolation. He died on January 7, 1943, alone in his hotel room. A maid found him the next morning. He was 86.</p>
+            <blockquote class="feature-story__pullquote">
+              &ldquo;I do not think there is any thrill that can go through the human heart like that felt by the inventor as he sees some creation of the brain unfolding to success.&rdquo;
+              <cite>— Nikola Tesla</cite>
+            </blockquote>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       TESLA'S LEGACY TODAY
+  ═══════════════════════════════════════ -->
+  <section class="legacy" id="legacy" aria-labelledby="legacy-title">
+    <div class="container">
+      <header class="legacy__header">
+        <span class="section-label">Still Alive</span>
+        <h2 class="section-title" id="legacy-title">Tesla's Legacy Today</h2>
+        <p class="section-desc">Every time you flip a light switch, stream Wi-Fi, or charge a phone, you are using technology Tesla either invented or made possible. Here's where his genius lives on.</p>
+      </header>
+
+      <div class="legacy-grid">
+
+        <div class="legacy-card fade-in">
+          <div class="legacy-card__year">Present</div>
+          <div class="legacy-card__icon">🚗</div>
+          <h3 class="legacy-card__title">Tesla Motors</h3>
+          <p class="legacy-card__text">Elon Musk named his electric vehicle company after Tesla specifically because Tesla invented the AC induction motor — the same motor technology inside every Tesla EV on the road today. The name is a direct tribute.</p>
+        </div>
+
+        <div class="legacy-card fade-in">
+          <div class="legacy-card__year">Present</div>
+          <div class="legacy-card__icon">📶</div>
+          <h3 class="legacy-card__title">Wireless Everything</h3>
+          <p class="legacy-card__text">Wi-Fi, Bluetooth, radio, cellular networks — all trace their lineage directly to Tesla's work on wireless transmission. He demonstrated radio technology in 1893. Every wireless signal in the world carries his DNA.</p>
+        </div>
+
+        <div class="legacy-card fade-in">
+          <div class="legacy-card__year">Present</div>
+          <div class="legacy-card__icon">🔌</div>
+          <h3 class="legacy-card__title">Your Power Grid</h3>
+          <p class="legacy-card__text">The alternating current electricity flowing through every outlet in your home, your office, every building on Earth — that is Tesla's system, exactly as he designed it in the 1880s. Nothing has fundamentally changed.</p>
+        </div>
+
+        <div class="legacy-card fade-in">
+          <div class="legacy-card__year">2021</div>
+          <div class="legacy-card__icon">🔬</div>
+          <h3 class="legacy-card__title">Tesla Valve Rediscovered</h3>
+          <p class="legacy-card__text">In 2021, scientists published research in Nature rediscovering Tesla's 1920 "valvular conduit" — a one-way valve with no moving parts. They found new applications in microfluidics and medical devices. 100 years later, still ahead of the curve.</p>
+        </div>
+
+        <div class="legacy-card fade-in">
+          <div class="legacy-card__year">Now</div>
+          <div class="legacy-card__icon">🛯️</div>
+          <h3 class="legacy-card__title">Wireless Power Charging</h3>
+          <p class="legacy-card__text">Qi wireless charging in your phone is a direct realization of Tesla's dream of wireless power transfer. Companies are now working on room-scale wireless charging — exactly what Tesla described as his ultimate goal over 120 years ago.</p>
+        </div>
+
+        <div class="legacy-card fade-in">
+          <div class="legacy-card__year">Ongoing</div>
+          <div class="legacy-card__icon">🌩️</div>
+          <h3 class="legacy-card__title">Directed Energy Weapons</h3>
+          <p class="legacy-card__text">Modern military "directed energy weapons" — laser defense systems and charged-particle beam weapons — bear a striking resemblance to Tesla's 1934 Teleforce concept. The U.S. and Soviet militaries both developed beam weapons, likely inspired by his seized papers.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       MISCONCEPTIONS
+  ═══════════════════════════════════════ -->
+  <section class="myths" id="myths" aria-labelledby="myths-title">
+    <div class="container">
+      <header class="myths__header">
+        <span class="section-label">Setting the Record Straight</span>
+        <h2 class="section-title" id="myths-title">Myths vs. Reality</h2>
+        <p class="section-desc">History has been both unfair and over-romantic about Tesla. Here's what's true, what's exaggerated, and what's outright false.</p>
+      </header>
+
+      <div class="myth-list">
+
+        <div class="myth-card fade-in">
+          <div class="myth-card__header">
+            <span class="myth-card__verdict myth-card__verdict--false">❌ Myth</span>
+            <h3 class="myth-card__claim">"Edison stole all of Tesla's ideas"</h3>
+          </div>
+          <p class="myth-card__reality">Edison and Tesla had a genuine professional falling-out over wages and working style — not intellectual theft. Their real conflict was the War of Currents: a legitimate technical and business dispute over AC vs. DC. Edison was a ruthless competitor, but calling him a thief oversimplifies a complex rivalry.</p>
+        </div>
+
+        <div class="myth-card fade-in">
+          <div class="myth-card__header">
+            <span class="myth-card__verdict myth-card__verdict--true">✅ True</span>
+            <h3 class="myth-card__claim">"Marconi used Tesla's patents for radio"</h3>
+          </div>
+          <p class="myth-card__reality">This is confirmed fact. The U.S. Supreme Court ruled in 1943 — six months after Tesla's death — that Marconi's key radio patents were invalid because Tesla had filed them first. Tesla is the legal and scientific father of radio, period.</p>
+        </div>
+
+        <div class="myth-card fade-in">
+          <div class="myth-card__header">
+            <span class="myth-card__verdict myth-card__verdict--partial">⚠️ Partially True</span>
+            <h3 class="myth-card__claim">"Tesla discovered free energy for everyone"</h3>
+          </div>
+          <p class="myth-card__reality">Tesla did research wireless power transmission and believed electricity could be delivered cheaply at global scale. But "free energy" as perpetual motion or zero-cost power was never Tesla's claim — it was a later internet myth. His Wardenclyffe project would have been costly and required massive infrastructure. "Affordable and wireless" was the vision, not "free."</p>
+        </div>
+
+        <div class="myth-card fade-in">
+          <div class="myth-card__header">
+            <span class="myth-card__verdict myth-card__verdict--true">✅ True</span>
+            <h3 class="myth-card__claim">"The government seized Tesla's papers when he died"</h3>
+          </div>
+          <p class="myth-card__reality">Confirmed. The FBI's Office of Alien Property took possession of Tesla's personal papers within hours of his death in January 1943. The papers were classified and not fully released for decades. John Trump (MIT physicist and uncle of Donald Trump) reviewed them and concluded they posed no immediate national security threat.</p>
+        </div>
+
+        <div class="myth-card fade-in">
+          <div class="myth-card__header">
+            <span class="myth-card__verdict myth-card__verdict--false">❌ Myth</span>
+            <h3 class="myth-card__claim">"Tesla had no business sense at all"</h3>
+          </div>
+          <p class="myth-card__reality">Early in his career, Tesla was extremely savvy. He negotiated effectively with Westinghouse and sold his AC patents for a substantial sum. What undermined him financially was a combination of visionary projects that had no immediate commercial path (Wardenclyffe), a personality that valued discovery over profit, and genuinely bad luck with investors who prioritized short-term returns.</p>
+        </div>
+
+        <div class="myth-card fade-in">
+          <div class="myth-card__header">
+            <span class="myth-card__verdict myth-card__verdict--true">✅ True</span>
+            <h3 class="myth-card__claim">"Tesla predicted smartphones and the internet"</h3>
+          </div>
+          <p class="myth-card__reality">In 1908, Tesla wrote: "As soon as [the wireless system] is completed, it will be possible for a businessman in New York to dictate instructions, and [have them] instantly appear in type at his office in London or elsewhere. He will be able to call up from his desk and talk to any telephone subscriber on the globe." That is a phone. Tesla predicted it in 1908.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       FAQ ACCORDION
+  ═══════════════════════════════════════ -->
+  <section class="faq" id="faq" aria-labelledby="faq-title">
+    <div class="container container--default">
+      <header class="faq__header">
+        <span class="section-label">Quick Answers</span>
+        <h2 class="section-title" id="faq-title">Frequently Asked Questions</h2>
+        <p class="section-desc">The most common questions about Tesla — answered directly.</p>
+      </header>
+
+      <div class="faq-list" role="list">
+
+        <details class="faq-item fade-in" open>
+          <summary class="faq-item__q">Why is Tesla called the "forgotten wizard"?</summary>
+          <div class="faq-item__a">
+            <p>Despite being responsible for the AC electrical system powering every home and device on Earth, Tesla died in obscurity in 1943 — broke, alone, and largely forgotten by the scientific establishment. His rival Edison received far more popular recognition during their lifetimes. It wasn't until decades later, particularly with the rise of the internet, that Tesla's contributions were rediscovered and celebrated. The nickname "forgotten wizard" captures both his genius and his tragic erasure from mainstream history.</p>
+          </div>
+        </details>
+
+        <details class="faq-item fade-in">
+          <summary class="faq-item__q">Did Tesla and Edison ever reconcile?</summary>
+          <div class="faq-item__a">
+            <p>No. The two men remained at odds throughout their lives. Edison reportedly said Tesla was "the greatest inventor in the world" in private, but never publicly acknowledged his contributions. When Edison died in 1931, Tesla gave a brief statement to the press praising his energy and drive — notably without crediting his scientific work. In 1915, both men were widely reported to be sharing the Nobel Prize in Physics. Neither received it. Many historians believe mutual animosity was the reason.</p>
+          </div>
+        </details>
+
+        <details class="faq-item fade-in">
+          <summary class="faq-item__q">How did Tesla pay for his research?</summary>
+          <div class="faq-item__a">
+            <p>Throughout his career, Tesla relied on wealthy patrons and investors. His biggest early supporter was George Westinghouse, who purchased his AC patents. For the Wardenclyffe Tower, J.P. Morgan provided over $150,000 — then withdrew funding when he realized the system might allow anyone to access power without paying for it. Later in life Tesla struggled constantly with finances, often unable to pay his hotel bills and relying on the generosity of friends.</p>
+          </div>
+        </details>
+
+        <details class="faq-item fade-in">
+          <summary class="faq-item__q">What were Tesla's strangest habits?</summary>
+          <div class="faq-item__a">
+            <p>Tesla had obsessive-compulsive tendencies throughout his life. He was intensely averse to pearls — he once refused to work if a secretary wore them. He disliked touching round objects and couldn't stand hair. He was obsessed with the number 3 and would walk around a block three times before entering a building. He calculated the cubic volume of food before eating it. Despite these quirks, he was considered charming, witty, and a genuinely great dinner conversationalist — regularly dining at Delmonico's restaurant in New York.</p>
+          </div>
+        </details>
+
+        <details class="faq-item fade-in">
+          <summary class="faq-item__q">What is the "369" theory people attribute to Tesla?</summary>
+          <div class="faq-item__a">
+            <p>Tesla said: "If you only knew the magnificence of the 3, 6, and 9, then you would have a key to the universe." He did have a peculiar fascination with numbers divisible by 3. However, the widespread internet theory that Tesla left behind a secret code or mathematical key to free energy is not supported by historical evidence. What is real: Tesla's scientific papers, patents, and lab notebooks are extensively documented and publicly available — none contain a hidden 369 formula.</p>
+          </div>
+        </details>
+
+        <details class="faq-item fade-in">
+          <summary class="faq-item__q">Is the modern Tesla car company connected to the real Tesla?</summary>
+          <div class="faq-item__a">
+            <p>The company is named in his honor, and the connection is very real technically: every Tesla electric vehicle uses an AC induction motor — the specific motor technology that Nikola Tesla patented in 1888. The rotating magnetic field principle inside those motors is literally Tesla's invention, unchanged at its core. Elon Musk has stated the name was chosen deliberately as a tribute to the inventor whose work made electric motors practical.</p>
+          </div>
+        </details>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════
+       TESLA LAB — GAME SECTION
+  ═══════════════════════════════════════ -->
+  <section class="lab-game" id="lab" aria-labelledby="lab-title">
+    <div class="lab-game__bg" aria-hidden="true"></div>
+    <div class="container">
+
+      <header class="lab-game__header">
+        <span class="section-label">Interactive Experience</span>
+        <h2 class="section-title" id="lab-title">Tesla's Laboratory</h2>
+        <p class="section-desc">Step inside the lab. Build your own Tesla Coil. Wind your own electric motor. See exactly how Tesla's inventions work — in real time, in your browser.</p>
+      </header>
+
+      <div class="lab-games-grid">
+
+        <!-- Game 1: Tesla Coil Builder -->
+        <div class="lab-game-card fade-in" id="game-coil-card">
+          <div class="lab-game-card__preview">
+            <canvas id="coil-preview-canvas" width="400" height="220" aria-hidden="true"></canvas>
+            <div class="lab-game-card__overlay">
+              <a href="game.html" class="lab-game-card__play-btn" aria-label="Play Tesla Coil Builder">
+                <span class="play-icon">▶</span>
+                <span>Play Now</span>
+              </a>
+            </div>
+          </div>
+          <div class="lab-game-card__body">
+            <div class="lab-game-card__badge">Free to Play</div>
+            <h3 class="lab-game-card__title">Tesla Coil Builder</h3>
+            <p class="lab-game-card__desc">Build your own Tesla Coil from components. Adjust the primary coil, secondary coil, capacitor, and spark gap. Watch real electricity arc between the terminals — and learn why each part matters.</p>
+            <ul class="lab-game-card__features">
+              <li>⚡ Drag-and-drop coil components</li>
+              <li>🎛️ Tune frequency &amp; voltage in real time</li>
+              <li>🌩️ Watch live arcing electricity</li>
+              <li>📖 Learn mode explains each part</li>
+            </ul>
+            <a href="game.html" class="btn btn--primary" style="display:inline-flex;margin-top:var(--space-4)">Launch Coil Builder ⚡</a>
           </div>
         </div>
 
-        <div class="merch-card fade-in">
-          <div class="merch-card__img" aria-hidden="true">🌀</div>
-          <div class="merch-card__body">
-            <h3 class="merch-card__title">Wardenclyffe Poster</h3>
-            <p class="merch-card__price">$22</p>
-            <a href="#newsletter" class="merch-card__cta">Notify Me</a>
+        <!-- Game 2: AC Motor Builder -->
+        <div class="lab-game-card fade-in" id="game-motor-card">
+          <div class="lab-game-card__preview lab-game-card__preview--motor">
+            <canvas id="motor-preview-canvas" width="400" height="220" aria-hidden="true"></canvas>
+            <div class="lab-game-card__overlay">
+              <a href="game.html#motor" class="lab-game-card__play-btn" aria-label="Play AC Motor Builder">
+                <span class="play-icon">▶</span>
+                <span>Play Now</span>
+              </a>
+            </div>
           </div>
-        </div>
-
-        <div class="merch-card fade-in">
-          <div class="merch-card__img" aria-hidden="true">🔬</div>
-          <div class="merch-card__body">
-            <h3 class="merch-card__title">Patent Blueprint Print</h3>
-            <p class="merch-card__price">$35</p>
-            <a href="#newsletter" class="merch-card__cta">Notify Me</a>
-          </div>
-        </div>
-
-        <div class="merch-card fade-in">
-          <div class="merch-card__img" aria-hidden="true">☕</div>
-          <div class="merch-card__body">
-            <h3 class="merch-card__title">"3, 6, 9" Mug</h3>
-            <p class="merch-card__price">$18</p>
-            <a href="#newsletter" class="merch-card__cta">Notify Me</a>
+          <div class="lab-game-card__body">
+            <div class="lab-game-card__badge lab-game-card__badge--gold">Coming Soon</div>
+            <h3 class="lab-game-card__title">AC Induction Motor</h3>
+            <p class="lab-game-card__desc">Wind the stator coils. Place the rotor. Apply AC current and watch the rotating magnetic field spin your motor to life — the exact invention Tesla sketched in the dirt in 1882 in a Budapest park.</p>
+            <ul class="lab-game-card__features">
+              <li>🔄 Visualize the rotating magnetic field</li>
+              <li>🔧 Adjust pole count &amp; frequency</li>
+              <li>📊 Live RPM &amp; torque readout</li>
+              <li>🏆 Efficiency challenges to unlock</li>
+            </ul>
+            <a href="#newsletter" class="btn btn--outline" style="display:inline-flex;margin-top:var(--space-4)">Get Notified When Live</a>
           </div>
         </div>
 
       </div>
 
-      <!-- Affiliate Banner -->
-      <div class="affiliate-bar fade-in">
-        <p class="affiliate-bar__label">Recommended · Affiliate Partner</p>
-        <h3 class="affiliate-bar__title">Explore Tesla Books & Documentaries</h3>
-        <p class="affiliate-bar__text">Dive deeper into Tesla's world with the best biographies, documentaries, and science books on his life and inventions.</p>
-        <a href="https://www.amazon.com/s?k=nikola+tesla+biography&tag=forgottenwizard-20" target="_blank" rel="noopener sponsored" class="btn btn--outline" style="display:inline-flex;">Browse on Amazon ↗</a>
+      <!-- Mini teaser game embedded -->
+      <div class="lab-embed fade-in">
+        <div class="lab-embed__header">
+          <h3 class="lab-embed__title">⚡ Try It Now — Mini Tesla Coil</h3>
+          <p class="lab-embed__sub">Move your mouse over the coil below. Click to fire a bolt. This is a tiny preview of the full game.</p>
+        </div>
+        <div class="lab-embed__frame">
+          <canvas id="mini-game-canvas" aria-label="Interactive Tesla coil mini-game"></canvas>
+          <div class="lab-embed__hint" id="game-hint">Move your cursor over the coil ⚡</div>
+        </div>
       </div>
 
     </div>

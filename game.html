@@ -1,0 +1,1267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-Frame-Options" content="SAMEORIGIN" />
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <title>Tesla's Laboratory — ForgottenWizard.com</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23050508'/><path d='M16 4 L22 14 H18 L20 28 L10 16 H14 Z' fill='%2300b4ff' opacity='0.9'/></svg>" />
+  <style>
+    :root {
+      --bg: #050508;
+      --surface: #0a0a12;
+      --surface2: #0e0e1c;
+      --border: #1a1a2e;
+      --text: #e8e8f0;
+      --muted: #7777aa;
+      --faint: #33334a;
+      --blue: #00b4ff;
+      --blue-glow: rgba(0,180,255,0.35);
+      --gold: #f0c040;
+      --violet: #9b59f5;
+      --green: #4ecca3;
+      --red: #ff6060;
+      --font-display: 'Cinzel', Georgia, serif;
+      --font-body: 'Inter', system-ui, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --r: 0.5rem;
+      --rl: 0.75rem;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; overflow: hidden; }
+    body {
+      font-family: var(--font-body);
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      user-select: none;
+    }
+
+    /* ── TOP BAR ── */
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 20px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .topbar__logo {
+      display: flex; align-items: center; gap: 8px;
+      text-decoration: none; color: var(--blue);
+      font-family: var(--font-display);
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      text-shadow: 0 0 10px rgba(0,180,255,0.5);
+    }
+    .topbar__logo svg { width: 24px; height: 24px; }
+    .topbar__title {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: 0.05em;
+    }
+    .topbar__tabs {
+      display: flex; gap: 4px;
+    }
+    .tab-btn {
+      padding: 6px 16px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--muted);
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .tab-btn.active, .tab-btn:hover {
+      background: rgba(0,180,255,0.1);
+      border-color: rgba(0,180,255,0.4);
+      color: var(--blue);
+    }
+    .topbar__score {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--gold);
+      text-shadow: 0 0 10px rgba(240,192,64,0.4);
+    }
+
+    /* ── MAIN LAYOUT ── */
+    .game-layout {
+      display: flex;
+      flex: 1;
+      overflow: hidden;
+      min-height: 0;
+    }
+
+    /* ── LEFT PANEL (parts) ── */
+    .parts-panel {
+      width: 200px;
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+      flex-shrink: 0;
+    }
+    .parts-panel__heading {
+      padding: 12px 16px 8px;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 700;
+      border-bottom: 1px solid var(--border);
+    }
+    .part-item {
+      padding: 10px 14px;
+      cursor: grab;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.15s;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .part-item:hover { background: rgba(0,180,255,0.06); }
+    .part-item.selected { background: rgba(0,180,255,0.12); border-left: 2px solid var(--blue); }
+    .part-item__icon { font-size: 1.3rem; flex-shrink: 0; }
+    .part-item__info {}
+    .part-item__name { font-size: 0.75rem; font-weight: 600; color: var(--text); }
+    .part-item__desc { font-size: 0.65rem; color: var(--muted); margin-top: 2px; line-height: 1.4; }
+
+    /* ── CANVAS AREA ── */
+    .canvas-wrap {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+      background: #020408;
+      min-width: 0;
+    }
+    #game-canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+      cursor: crosshair;
+    }
+    .canvas-overlay {
+      position: absolute;
+      bottom: 12px; left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.7rem;
+      color: var(--faint);
+      font-family: var(--font-mono);
+      letter-spacing: 0.1em;
+      pointer-events: none;
+      text-transform: uppercase;
+    }
+
+    /* ── RIGHT PANEL (controls) ── */
+    .ctrl-panel {
+      width: 220px;
+      background: var(--surface);
+      border-left: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+      flex-shrink: 0;
+    }
+    .ctrl-section {
+      border-bottom: 1px solid var(--border);
+      padding: 14px 14px 12px;
+    }
+    .ctrl-section__title {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .ctrl-row {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .ctrl-label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.72rem;
+      color: var(--muted);
+      margin-bottom: 3px;
+    }
+    .ctrl-label span {
+      font-family: var(--font-mono);
+      color: var(--blue);
+      font-size: 0.7rem;
+    }
+    input[type=range] {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 4px;
+      border-radius: 2px;
+      background: var(--border);
+      outline: none;
+      cursor: pointer;
+    }
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      background: var(--blue);
+      box-shadow: 0 0 8px var(--blue-glow);
+      cursor: pointer;
+    }
+    .ctrl-btn {
+      width: 100%;
+      padding: 8px;
+      border-radius: var(--r);
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--muted);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .ctrl-btn:hover { border-color: var(--blue); color: var(--blue); background: rgba(0,180,255,0.07); }
+    .ctrl-btn--fire {
+      background: rgba(0,180,255,0.1);
+      border-color: rgba(0,180,255,0.4);
+      color: var(--blue);
+      font-size: 0.8rem;
+      padding: 10px;
+    }
+    .ctrl-btn--fire:hover {
+      background: rgba(0,180,255,0.25);
+      box-shadow: 0 0 20px rgba(0,180,255,0.3);
+    }
+    .ctrl-btn--reset { border-color: rgba(255,80,80,0.3); }
+    .ctrl-btn--reset:hover { border-color: var(--red); color: var(--red); background: rgba(255,80,80,0.07); }
+
+    /* ── READOUTS ── */
+    .readout-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+    }
+    .readout {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      padding: 6px 8px;
+      text-align: center;
+    }
+    .readout__val {
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--blue);
+      text-shadow: 0 0 8px var(--blue-glow);
+    }
+    .readout__label {
+      font-size: 0.58rem;
+      color: var(--faint);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-top: 2px;
+    }
+
+    /* ── INFO / LEARN MODE ── */
+    .learn-box {
+      padding: 14px;
+      flex: 1;
+      overflow-y: auto;
+    }
+    .learn-box__title {
+      font-family: var(--font-display);
+      font-size: 0.8rem;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+    .learn-box__text {
+      font-size: 0.7rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    .learn-box__text strong { color: var(--blue); }
+
+    /* ── STATUS BAR ── */
+    .statusbar {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 6px 16px;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      font-size: 0.65rem;
+      color: var(--faint);
+      font-family: var(--font-mono);
+      letter-spacing: 0.08em;
+      flex-shrink: 0;
+    }
+    .statusbar__item { display: flex; align-items: center; gap: 4px; }
+    .statusbar__dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 6px rgba(78,204,163,0.6);
+      animation: blink 2s ease-in-out infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+    /* ── MOTOR TAB ── */
+    .motor-info {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      color: var(--muted);
+      font-size: 0.85rem;
+      text-align: center;
+      padding: 40px;
+    }
+    .motor-info__icon { font-size: 4rem; opacity: 0.4; }
+    .motor-info h3 { font-family: var(--font-display); font-size: 1.2rem; color: var(--text); }
+    .motor-info p { max-width: 380px; line-height: 1.7; font-size: 0.8rem; }
+
+    /* ── MOBILE LAYOUT ── */
+    @media (max-width: 768px) {
+      html, body { overflow: hidden; }
+
+      .topbar {
+        padding: 8px 12px;
+        gap: 8px;
+      }
+      .topbar__title { display: none; }
+      .topbar__score { font-size: 0.75rem; margin-left: auto; }
+      .tab-btn { padding: 5px 10px; font-size: 0.65rem; }
+
+      /* Stack layout: canvas on top, controls below */
+      .game-layout {
+        flex-direction: column;
+        overflow: hidden;
+      }
+
+      /* Hide left parts panel — parts go into bottom tray */
+      .parts-panel {
+        display: none;
+      }
+
+      /* Canvas takes priority, fills most of screen */
+      .canvas-wrap {
+        flex: 1 1 auto;
+        min-height: 0;
+      }
+
+      /* Control panel becomes a horizontal bottom drawer */
+      .ctrl-panel {
+        width: 100%;
+        max-height: 36vh;
+        border-left: none;
+        border-top: 1px solid var(--border);
+        flex-direction: row;
+        overflow-x: auto;
+        overflow-y: hidden;
+        flex-shrink: 0;
+        scrollbar-width: thin;
+        scrollbar-color: var(--border) transparent;
+      }
+
+      .ctrl-section {
+        min-width: 160px;
+        border-bottom: none;
+        border-right: 1px solid var(--border);
+        flex-shrink: 0;
+        overflow-y: auto;
+        max-height: 36vh;
+      }
+
+      /* Readouts grid inline */
+      .readout-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 4px;
+      }
+
+      .readout__val { font-size: 0.8rem; }
+
+      /* Range slider thumb bigger for touch */
+      input[type=range]::-webkit-slider-thumb {
+        width: 20px;
+        height: 20px;
+      }
+      input[type=range] { height: 6px; }
+
+      .ctrl-btn {
+        padding: 10px 8px;
+        font-size: 0.7rem;
+      }
+      .ctrl-btn--fire { padding: 12px; }
+
+      /* Learn box scrollable */
+      .learn-box {
+        min-width: 180px;
+        max-height: 36vh;
+        overflow-y: auto;
+      }
+
+      /* Status bar compact */
+      .statusbar {
+        padding: 4px 12px;
+        gap: 10px;
+        font-size: 0.6rem;
+        flex-wrap: wrap;
+      }
+    }
+
+    /* Very small phones */
+    @media (max-width: 400px) {
+      .topbar { padding: 6px 10px; }
+      .tab-btn { padding: 4px 8px; font-size: 0.6rem; }
+      .ctrl-panel { max-height: 32vh; }
+      .ctrl-section { min-width: 140px; }
+    }
+
+    /* Mobile parts quick-select strip above canvas */
+    @media (max-width: 768px) {
+      .mobile-parts-strip {
+        display: flex !important;
+        overflow-x: auto;
+        gap: 6px;
+        padding: 6px 10px;
+        background: var(--surface);
+        border-bottom: 1px solid var(--border);
+        scrollbar-width: none;
+        flex-shrink: 0;
+      }
+      .mobile-parts-strip::-webkit-scrollbar { display: none; }
+      .mobile-part-btn {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2px;
+        padding: 6px 10px;
+        border-radius: 8px;
+        border: 1px solid var(--border);
+        background: transparent;
+        cursor: pointer;
+        flex-shrink: 0;
+        transition: all 0.15s;
+        min-width: 56px;
+      }
+      .mobile-part-btn.selected,
+      .mobile-part-btn:active {
+        background: rgba(0,180,255,0.12);
+        border-color: rgba(0,180,255,0.5);
+      }
+      .mobile-part-btn__icon { font-size: 1.2rem; line-height: 1; }
+      .mobile-part-btn__label { font-size: 0.55rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; white-space: nowrap; }
+    }
+    @media (min-width: 769px) {
+      .mobile-parts-strip { display: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <header class="topbar">
+    <a href="index.html" class="topbar__logo" aria-label="Back to ForgottenWizard">
+      <svg viewBox="0 0 36 36" fill="none"><rect width="36" height="36" rx="8" fill="#050508"/><path d="M18 4 L25 16 H21 L23 32 L11 18 H15 Z" fill="#00b4ff"/></svg>
+      ForgottenWizard
+    </a>
+    <span class="topbar__title">Tesla's Laboratory</span>
+    <div class="topbar__tabs">
+      <button class="tab-btn active" id="tab-coil" onclick="switchTab('coil')">⚡ Coil Builder</button>
+      <button class="tab-btn" id="tab-motor" onclick="switchTab('motor')">🔄 AC Motor</button>
+    </div>
+    <div class="topbar__score">Score: <span id="score-display">0</span></div>
+  </header>
+
+  <!-- MOBILE PARTS STRIP (visible on mobile only) -->
+  <div class="mobile-parts-strip" id="mobile-parts-strip" aria-label="Select component">
+    <button class="mobile-part-btn selected" id="mob-toroid" onclick="selectPart('toroid');updateMobileStrip('toroid')">
+      <span class="mobile-part-btn__icon">🔘</span>
+      <span class="mobile-part-btn__label">Toroid</span>
+    </button>
+    <button class="mobile-part-btn" id="mob-secondary" onclick="selectPart('secondary');updateMobileStrip('secondary')">
+      <span class="mobile-part-btn__icon">🌀</span>
+      <span class="mobile-part-btn__label">Secondary</span>
+    </button>
+    <button class="mobile-part-btn" id="mob-primary" onclick="selectPart('primary');updateMobileStrip('primary')">
+      <span class="mobile-part-btn__icon">⭕</span>
+      <span class="mobile-part-btn__label">Primary</span>
+    </button>
+    <button class="mobile-part-btn" id="mob-capacitor" onclick="selectPart('capacitor');updateMobileStrip('capacitor')">
+      <span class="mobile-part-btn__icon">🔋</span>
+      <span class="mobile-part-btn__label">Capacitor</span>
+    </button>
+    <button class="mobile-part-btn" id="mob-spark" onclick="selectPart('spark');updateMobileStrip('spark')">
+      <span class="mobile-part-btn__icon">⚡</span>
+      <span class="mobile-part-btn__label">Spark Gap</span>
+    </button>
+    <button class="mobile-part-btn" id="mob-ground" onclick="selectPart('ground');updateMobileStrip('ground')">
+      <span class="mobile-part-btn__icon">⏚</span>
+      <span class="mobile-part-btn__label">Ground</span>
+    </button>
+  </div>
+
+  <!-- MAIN -->
+  <div class="game-layout">
+
+    <!-- LEFT: PARTS PANEL -->
+    <aside class="parts-panel" aria-label="Parts palette">
+      <div class="parts-panel__heading">Components</div>
+
+      <div class="part-item" onclick="selectPart('toroid')" id="part-toroid">
+        <div class="part-item__icon">🔘</div>
+        <div class="part-item__info">
+          <div class="part-item__name">Toroid</div>
+          <div class="part-item__desc">Top terminal that emits sparks</div>
+        </div>
+      </div>
+      <div class="part-item" onclick="selectPart('secondary')" id="part-secondary">
+        <div class="part-item__icon">🌀</div>
+        <div class="part-item__info">
+          <div class="part-item__name">Secondary Coil</div>
+          <div class="part-item__desc">High-voltage resonant winding</div>
+        </div>
+      </div>
+      <div class="part-item" onclick="selectPart('primary')" id="part-primary">
+        <div class="part-item__icon">⭕</div>
+        <div class="part-item__info">
+          <div class="part-item__name">Primary Coil</div>
+          <div class="part-item__desc">Low-turn input coil</div>
+        </div>
+      </div>
+      <div class="part-item" onclick="selectPart('capacitor')" id="part-capacitor">
+        <div class="part-item__icon">⚡</div>
+        <div class="part-item__info">
+          <div class="part-item__name">Capacitor</div>
+          <div class="part-item__desc">Stores charge for spark gap</div>
+        </div>
+      </div>
+      <div class="part-item" onclick="selectPart('sparkgap')" id="part-sparkgap">
+        <div class="part-item__icon">✦</div>
+        <div class="part-item__info">
+          <div class="part-item__name">Spark Gap</div>
+          <div class="part-item__desc">Triggers resonant oscillation</div>
+        </div>
+      </div>
+      <div class="part-item" onclick="selectPart('ground')" id="part-ground">
+        <div class="part-item__icon">⏚</div>
+        <div class="part-item__info">
+          <div class="part-item__name">Ground</div>
+          <div class="part-item__desc">Earth return path</div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- CENTER: CANVAS -->
+    <main class="canvas-wrap" id="canvas-wrap">
+      <canvas id="game-canvas"></canvas>
+      <div class="canvas-overlay" id="canvas-hint">Click the coil to fire · Drag sliders to tune</div>
+    </main>
+
+    <!-- RIGHT: CONTROLS -->
+    <aside class="ctrl-panel" aria-label="Controls">
+
+      <div class="ctrl-section">
+        <div class="ctrl-section__title">Power Controls</div>
+        <div class="ctrl-row">
+          <div>
+            <div class="ctrl-label">Voltage <span id="lbl-voltage">50 kV</span></div>
+            <input type="range" min="10" max="200" value="50" id="sl-voltage" oninput="updateParam('voltage',this.value)" />
+          </div>
+          <div>
+            <div class="ctrl-label">Frequency <span id="lbl-freq">60 Hz</span></div>
+            <input type="range" min="10" max="500" value="60" id="sl-freq" oninput="updateParam('freq',this.value)" />
+          </div>
+          <div>
+            <div class="ctrl-label">Capacitance <span id="lbl-cap">10 nF</span></div>
+            <input type="range" min="1" max="100" value="10" id="sl-cap" oninput="updateParam('cap',this.value)" />
+          </div>
+        </div>
+      </div>
+
+      <div class="ctrl-section">
+        <div class="ctrl-section__title">Coil Geometry</div>
+        <div class="ctrl-row">
+          <div>
+            <div class="ctrl-label">Primary turns <span id="lbl-pturns">5</span></div>
+            <input type="range" min="2" max="20" value="5" id="sl-pturns" oninput="updateParam('pturns',this.value)" />
+          </div>
+          <div>
+            <div class="ctrl-label">Secondary turns <span id="lbl-sturns">800</span></div>
+            <input type="range" min="100" max="2000" value="800" id="sl-sturns" oninput="updateParam('sturns',this.value)" />
+          </div>
+          <div>
+            <div class="ctrl-label">Toroid size <span id="lbl-toroid">40</span></div>
+            <input type="range" min="10" max="80" value="40" id="sl-toroid" oninput="updateParam('toroid',this.value)" />
+          </div>
+        </div>
+      </div>
+
+      <div class="ctrl-section">
+        <div class="ctrl-section__title">Actions</div>
+        <div class="ctrl-row">
+          <button class="ctrl-btn ctrl-btn--fire" onclick="fireBolt()">⚡ Fire Bolt</button>
+          <button class="ctrl-btn" onclick="toggleAuto()" id="btn-auto">▶ Auto Fire</button>
+          <button class="ctrl-btn ctrl-btn--reset" onclick="resetCoil()">↺ Reset</button>
+        </div>
+      </div>
+
+      <div class="ctrl-section">
+        <div class="ctrl-section__title">Live Readouts</div>
+        <div class="readout-grid">
+          <div class="readout">
+            <div class="readout__val" id="rd-volt">50kV</div>
+            <div class="readout__label">Voltage</div>
+          </div>
+          <div class="readout">
+            <div class="readout__val" id="rd-freq">60Hz</div>
+            <div class="readout__label">Frequency</div>
+          </div>
+          <div class="readout">
+            <div class="readout__val" id="rd-arc">0</div>
+            <div class="readout__label">Arcs Fired</div>
+          </div>
+          <div class="readout">
+            <div class="readout__val" id="rd-eff" style="color:var(--green)">72%</div>
+            <div class="readout__label">Efficiency</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="learn-box">
+        <div class="learn-box__title" id="learn-title">How It Works</div>
+        <div class="learn-box__text" id="learn-text">
+          A Tesla Coil is a <strong>resonant transformer</strong>. The primary circuit (capacitor + spark gap + primary coil) stores energy, then dumps it into the secondary coil all at once.<br><br>
+          The two coils are tuned to the <strong>same resonant frequency</strong>, causing voltage to climb to millions of volts at the toroid terminal — producing spectacular lightning arcs into the air.
+        </div>
+      </div>
+
+    </aside>
+  </div>
+
+  <!-- STATUS BAR -->
+  <footer class="statusbar">
+    <div class="statusbar__item">
+      <div class="statusbar__dot"></div>
+      <span>System Active</span>
+    </div>
+    <div class="statusbar__item">⚡ Tesla Coil Builder v1.0</div>
+    <div class="statusbar__item" id="sb-selected">Selected: Toroid</div>
+    <div class="statusbar__item" style="margin-left:auto">
+      <a href="index.html" style="color:var(--blue);text-decoration:none;">← Back to Archive</a>
+    </div>
+  </footer>
+
+<script>
+// ─────────────────────────────────────────────────────────────────────
+// TESLA LAB GAME ENGINE
+// ─────────────────────────────────────────────────────────────────────
+
+const canvas = document.getElementById('game-canvas');
+const ctx = canvas.getContext('2d');
+const wrap = document.getElementById('canvas-wrap');
+
+// State
+const params = {
+  voltage: 50,
+  freq: 60,
+  cap: 10,
+  pturns: 5,
+  sturns: 800,
+  toroid: 40
+};
+
+let bolts = [];
+let sparks = [];
+let arcCount = 0;
+let score = 0;
+let autoFire = false;
+let autoTimer = 0;
+let animId = null;
+let lastTime = 0;
+let selectedPart = 'toroid';
+let currentTab = 'coil';
+let mouseX = 0, mouseY = 0;
+let mouseOnCanvas = false;
+let rotor = { angle: 0, speed: 0, targetSpeed: 0 };
+
+// Coil geometry (computed from canvas center)
+let coil = {};
+
+function computeCoil() {
+  const W = canvas.width, H = canvas.height;
+  coil.cx = W / 2;
+  coil.baseY = H * 0.88;
+  coil.topY = H * 0.18;
+  coil.toroidY = H * 0.16;
+  coil.toroidRx = params.toroid * (W / 600);
+  coil.toroidRy = coil.toroidRx * 0.3;
+  coil.secH = coil.baseY - coil.topY;
+  coil.secW = W * 0.06;
+  coil.primR = W * 0.12;
+}
+
+function resize() {
+  canvas.width = wrap.offsetWidth;
+  canvas.height = wrap.offsetHeight;
+  computeCoil();
+}
+window.addEventListener('resize', resize);
+resize();
+
+// ─── INPUT ────────────────────────────────────────────────────────────
+canvas.addEventListener('mousemove', e => {
+  const r = canvas.getBoundingClientRect();
+  mouseX = (e.clientX - r.left) * (canvas.width / r.width);
+  mouseY = (e.clientY - r.top) * (canvas.height / r.height);
+  mouseOnCanvas = true;
+});
+canvas.addEventListener('mouseleave', () => { mouseOnCanvas = false; });
+canvas.addEventListener('click', () => fireBolt());
+canvas.addEventListener('touchstart', e => {
+  e.preventDefault();
+  const t = e.touches[0];
+  const r = canvas.getBoundingClientRect();
+  mouseX = (t.clientX - r.left) * (canvas.width / r.width);
+  mouseY = (t.clientY - r.top) * (canvas.height / r.height);
+  mouseOnCanvas = true;
+  fireBolt();
+}, { passive: false });
+
+// ─── LIGHTNING ───────────────────────────────────────────────────────
+function generateBolt(x1, y1, x2, y2, rough=0.45, depth=0) {
+  if (depth > 8) return [{x:x1,y:y1},{x:x2,y:y2}];
+  const mx=(x1+x2)/2, my=(y1+y2)/2;
+  const dx=x2-x1, dy=y2-y1;
+  const len=Math.sqrt(dx*dx+dy*dy);
+  const off=(Math.random()-0.5)*len*rough;
+  const nx=-dy/len, ny=dx/len;
+  const l=generateBolt(x1,y1,mx+nx*off,my+ny*off,rough*0.65,depth+1);
+  const r=generateBolt(mx+nx*off,my+ny*off,x2,y2,rough*0.65,depth+1);
+  return [...l,...r];
+}
+
+class Bolt {
+  constructor(sx,sy,tx,ty,opts={}) {
+    this.pts = generateBolt(sx,sy,tx,ty,opts.rough||0.5);
+    this.life = opts.life||1;
+    this.decay = opts.decay||(0.04+Math.random()*0.06);
+    this.w = opts.w||(1+Math.random()*2);
+    this.col = opts.col||'rgba(0,200,255,';
+    this.branches = [];
+    if (Math.random()<0.5 && this.pts.length>6 && opts.branch!==false) {
+      const i=Math.floor(this.pts.length*(0.3+Math.random()*0.4));
+      const p=this.pts[i];
+      this.branches.push(new Bolt(p.x,p.y,
+        p.x+(Math.random()-0.5)*150, p.y+50+Math.random()*80,
+        {rough:0.6,life:this.life*0.6,decay:this.decay*1.5,w:this.w*0.45,col:'rgba(180,100,255,',branch:false}));
+    }
+  }
+  draw(ctx) {
+    if(this.life<=0||this.pts.length<2)return;
+    // glow
+    ctx.save();
+    ctx.globalAlpha=this.life*0.35;
+    ctx.shadowBlur=20; ctx.shadowColor=`${this.col}1)`;
+    ctx.strokeStyle=`${this.col}0.4)`;
+    ctx.lineWidth=this.w*4;
+    ctx.lineCap='round';ctx.lineJoin='round';
+    this._path(ctx); ctx.restore();
+    // core
+    ctx.save();
+    ctx.globalAlpha=this.life;
+    ctx.shadowBlur=8; ctx.shadowColor=`${this.col}1)`;
+    ctx.strokeStyle=`${this.col}${Math.min(1,this.life*1.4)})`;
+    ctx.lineWidth=this.w;
+    ctx.lineCap='round';ctx.lineJoin='round';
+    this._path(ctx); ctx.restore();
+    // hot white
+    ctx.save();
+    ctx.globalAlpha=this.life*0.7;
+    ctx.strokeStyle=`rgba(255,255,255,${this.life*0.5})`;
+    ctx.lineWidth=this.w*0.25;
+    this._path(ctx); ctx.restore();
+    this.branches.forEach(b=>b.draw(ctx));
+  }
+  _path(ctx) {
+    ctx.beginPath();
+    ctx.moveTo(this.pts[0].x,this.pts[0].y);
+    for(let i=1;i<this.pts.length;i++) ctx.lineTo(this.pts[i].x,this.pts[i].y);
+    ctx.stroke();
+  }
+  update() {
+    this.life-=this.decay;
+    this.branches.forEach(b=>b.update());
+  }
+  dead(){return this.life<=0;}
+}
+
+class Spark {
+  constructor(x,y,col='0,200,255') {
+    this.x=x; this.y=y;
+    const a=Math.random()*Math.PI*2, s=1+Math.random()*5;
+    this.vx=Math.cos(a)*s; this.vy=Math.sin(a)*s-2;
+    this.life=0.9+Math.random()*0.3;
+    this.decay=0.025+Math.random()*0.04;
+    this.sz=1+Math.random()*2.5;
+    this.col=col;
+  }
+  update(){this.x+=this.vx;this.y+=this.vy;this.vy+=0.18;this.vx*=0.94;this.life-=this.decay;}
+  draw(ctx){
+    if(this.life<=0)return;
+    ctx.save();
+    ctx.globalAlpha=this.life;
+    ctx.shadowBlur=6; ctx.shadowColor=`rgba(${this.col},1)`;
+    ctx.fillStyle=`rgba(${this.col},${this.life})`;
+    ctx.beginPath();
+    ctx.arc(this.x,this.y,this.sz,0,Math.PI*2);
+    ctx.fill();
+    ctx.restore();
+  }
+  dead(){return this.life<=0;}
+}
+
+// ─── DRAW FUNCTIONS ──────────────────────────────────────────────────
+function drawGrid() {
+  const W=canvas.width, H=canvas.height;
+  ctx.strokeStyle='rgba(0,80,120,0.12)';
+  ctx.lineWidth=1;
+  const sp=60;
+  for(let x=0;x<W;x+=sp){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke();}
+  for(let y=0;y<H;y+=sp){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();}
+}
+
+function drawTeslaCoil(t) {
+  const {cx,baseY,topY,toroidY,toroidRx,toroidRy,secH,secW,primR} = coil;
+  const W=canvas.width;
+
+  // Floor / platform
+  ctx.save();
+  ctx.strokeStyle='rgba(60,100,140,0.4)';
+  ctx.lineWidth=2;
+  ctx.beginPath();
+  ctx.moveTo(cx-primR*1.4,baseY);
+  ctx.lineTo(cx+primR*1.4,baseY);
+  ctx.stroke();
+  ctx.restore();
+
+  // Primary coil spiral (flat helical rings at base)
+  ctx.save();
+  ctx.strokeStyle=`rgba(240,192,64,${0.4+0.3*Math.sin(t*0.002*params.freq/60)})`;
+  ctx.shadowBlur=6; ctx.shadowColor='rgba(240,192,64,0.5)';
+  ctx.lineWidth=1.5;
+  const pn = params.pturns;
+  for(let i=0;i<pn;i++){
+    const r = primR*(0.4 + (i/(pn-1))*0.6);
+    const y = baseY - 6 - i*(10/(pn>1?pn-1:1));
+    ctx.beginPath();
+    ctx.ellipse(cx, y, r, r*0.25, 0, 0, Math.PI*2);
+    ctx.stroke();
+  }
+  ctx.restore();
+
+  // Secondary coil body (helix)
+  ctx.save();
+  const sn = Math.min(params.sturns / 50, 60);
+  const glowIntensity = 0.3 + 0.4*(params.voltage/200);
+  ctx.strokeStyle=`rgba(0,180,255,${glowIntensity})`;
+  ctx.shadowBlur=8; ctx.shadowColor='rgba(0,180,255,0.5)';
+  ctx.lineWidth=1;
+  for(let i=0;i<sn;i++){
+    const frac=i/sn;
+    const y = baseY - 14 - frac*secH;
+    const r = secW * (1 - frac*0.3);
+    ctx.beginPath();
+    ctx.ellipse(cx, y, r, r*0.18, 0, 0, Math.PI*2);
+    ctx.stroke();
+  }
+  ctx.restore();
+
+  // Vertical center post
+  ctx.save();
+  ctx.strokeStyle='rgba(50,80,120,0.4)';
+  ctx.lineWidth=2;
+  ctx.beginPath();
+  ctx.moveTo(cx, baseY-14);
+  ctx.lineTo(cx, topY);
+  ctx.stroke();
+  ctx.restore();
+
+  // Toroid
+  const pulse = 1 + 0.06*Math.sin(t*0.003*params.freq/60);
+  ctx.save();
+  ctx.shadowBlur=20+10*Math.sin(t*0.002);
+  ctx.shadowColor='rgba(0,200,255,0.8)';
+  ctx.strokeStyle=`rgba(0,220,255,${0.6+0.3*Math.sin(t*0.002)})`;
+  ctx.lineWidth=3;
+  ctx.beginPath();
+  ctx.ellipse(cx, toroidY, toroidRx*pulse, toroidRy*pulse, 0, 0, Math.PI*2);
+  ctx.stroke();
+  // Inner glow
+  const grad = ctx.createRadialGradient(cx,toroidY,0,cx,toroidY,toroidRx*1.5);
+  grad.addColorStop(0,'rgba(0,200,255,0.08)');
+  grad.addColorStop(1,'rgba(0,0,0,0)');
+  ctx.fillStyle=grad;
+  ctx.beginPath();
+  ctx.ellipse(cx,toroidY,toroidRx*1.5,toroidRx*0.6,0,0,Math.PI*2);
+  ctx.fill();
+  ctx.restore();
+
+  // Corona arcs — tiny ambient arcs around toroid
+  if(Math.random()<0.4*params.voltage/100) {
+    const a = Math.random()*Math.PI*2;
+    const r = toroidRx;
+    const sx = cx + Math.cos(a)*r;
+    const sy = toroidY + Math.sin(a)*toroidRy;
+    const tx2 = sx + (Math.random()-0.5)*toroidRx*0.8;
+    const ty2 = sy - 10 - Math.random()*20;
+    bolts.push(new Bolt(sx,sy,tx2,ty2,{rough:0.7,life:0.4+Math.random()*0.3,decay:0.1,w:0.5,col:'rgba(100,220,255,',branch:false}));
+  }
+
+  // Ground electrodes
+  ctx.save();
+  ctx.strokeStyle='rgba(60,100,140,0.5)';
+  ctx.lineWidth=2;
+  for(let i=-1;i<=1;i+=2) {
+    ctx.beginPath();
+    ctx.moveTo(cx+i*primR*1.2, baseY);
+    ctx.lineTo(cx+i*primR*1.2, baseY+12);
+    ctx.stroke();
+    for(let j=0;j<3;j++) {
+      const yy=baseY+8+j*5;
+      const ww=10-j*3;
+      ctx.beginPath();
+      ctx.moveTo(cx+i*primR*1.2-ww,yy);
+      ctx.lineTo(cx+i*primR*1.2+ww,yy);
+      ctx.stroke();
+    }
+  }
+  ctx.restore();
+}
+
+function drawMotorPreview(t) {
+  const W=canvas.width, H=canvas.height;
+  const cx=W/2, cy=H/2;
+  const R = Math.min(W,H)*0.32;
+
+  // Stator housing
+  ctx.save();
+  ctx.strokeStyle='rgba(60,80,120,0.5)';
+  ctx.lineWidth=12;
+  ctx.beginPath();
+  ctx.arc(cx,cy,R,0,Math.PI*2);
+  ctx.stroke();
+  ctx.restore();
+
+  // Stator coil poles (6 poles)
+  const poles=6;
+  for(let i=0;i<poles;i++) {
+    const angle=(i/poles)*Math.PI*2;
+    const phase=(t*0.002*params.freq/60)+(i/poles)*Math.PI*2;
+    const intensity=0.3+0.7*((Math.sin(phase)*0.5+0.5));
+    const hue=i%2===0?'0,180,255':'155,89,245';
+    ctx.save();
+    ctx.translate(cx+Math.cos(angle)*R*0.75, cy+Math.sin(angle)*R*0.75);
+    ctx.rotate(angle);
+    ctx.shadowBlur=10*intensity;
+    ctx.shadowColor=`rgba(${hue},${intensity})`;
+    ctx.fillStyle=`rgba(${hue},${intensity*0.8})`;
+    ctx.fillRect(-8,-16,16,32);
+    ctx.restore();
+  }
+
+  // Rotating magnetic field arrows
+  const fieldAngle = t*0.002*params.freq/60 * (params.pturns/5);
+  for(let i=0;i<3;i++) {
+    const a=fieldAngle+(i/3)*Math.PI*2;
+    const r2=R*0.55;
+    ctx.save();
+    ctx.translate(cx+Math.cos(a)*r2*0.5, cy+Math.sin(a)*r2*0.5);
+    ctx.rotate(a);
+    ctx.globalAlpha=0.6;
+    ctx.strokeStyle='rgba(0,200,255,0.8)';
+    ctx.lineWidth=2;
+    ctx.beginPath();
+    ctx.moveTo(-20,0); ctx.lineTo(20,0);
+    ctx.moveTo(14,-6); ctx.lineTo(20,0); ctx.lineTo(14,6);
+    ctx.stroke();
+    ctx.restore();
+  }
+
+  // Rotor
+  rotor.targetSpeed = params.freq / 60 * (params.voltage / 100) * 3;
+  rotor.speed += (rotor.targetSpeed - rotor.speed) * 0.03;
+  rotor.angle += rotor.speed * 0.016;
+
+  ctx.save();
+  ctx.translate(cx,cy);
+  ctx.rotate(rotor.angle);
+  const slotCount=8;
+  for(let i=0;i<slotCount;i++) {
+    const a=(i/slotCount)*Math.PI*2;
+    ctx.save();
+    ctx.rotate(a);
+    ctx.fillStyle=i%2===0?'rgba(0,160,255,0.7)':'rgba(155,89,245,0.5)';
+    ctx.fillRect(-4,-R*0.3,8,R*0.3);
+    ctx.restore();
+  }
+  // Shaft
+  ctx.beginPath();
+  ctx.arc(0,0,R*0.08,0,Math.PI*2);
+  ctx.fillStyle='rgba(80,120,200,0.9)';
+  ctx.shadowBlur=10; ctx.shadowColor='rgba(0,180,255,0.6)';
+  ctx.fill();
+  ctx.restore();
+
+  // RPM readout
+  const rpm = Math.round(rotor.speed*60);
+  ctx.save();
+  ctx.fillStyle='rgba(0,200,255,0.7)';
+  ctx.font=`600 ${Math.max(12,W*0.025)}px JetBrains Mono, monospace`;
+  ctx.textAlign='center';
+  ctx.fillText(`${rpm} RPM`, cx, cy+R+30);
+  ctx.restore();
+}
+
+// ─── GAME ACTIONS ────────────────────────────────────────────────────
+function fireBolt() {
+  if(currentTab==='motor') return;
+  const {cx,toroidY,toroidRx,toroidRy} = coil;
+  const angle = Math.random()*Math.PI*2;
+  const sx = cx + Math.cos(angle)*toroidRx;
+  const sy = toroidY + Math.sin(angle)*toroidRy;
+
+  let tx, ty;
+  if(mouseOnCanvas) {
+    tx = mouseX; ty = mouseY;
+  } else {
+    const dist = 100 + params.voltage * 2.5;
+    const ba = Math.random()*Math.PI*2;
+    tx = sx + Math.cos(ba)*dist;
+    ty = sy + Math.sin(ba)*dist;
+  }
+
+  const numBolts = 1 + Math.floor(params.voltage / 60);
+  for(let i=0;i<numBolts;i++) {
+    const spread=20;
+    bolts.push(new Bolt(sx,sy,tx+(Math.random()-0.5)*spread,ty+(Math.random()-0.5)*spread,{
+      rough:0.4+Math.random()*0.2,
+      life:0.8+Math.random()*0.2,
+      decay:0.035+Math.random()*0.03,
+      w:1.5+params.voltage/80,
+      col:'rgba(0,210,255,'
+    }));
+  }
+
+  // Sparks at target
+  for(let i=0;i<8+Math.floor(params.voltage/20);i++) {
+    sparks.push(new Spark(tx,ty,'0,200,255'));
+  }
+  // Sparks at toroid
+  for(let i=0;i<4;i++) sparks.push(new Spark(sx,sy,'150,200,255'));
+
+  arcCount++;
+  const pts = Math.floor(10 + params.voltage/10 + params.sturns/200);
+  score += pts;
+  document.getElementById('score-display').textContent = score.toLocaleString();
+  document.getElementById('rd-arc').textContent = arcCount;
+  updateEfficiency();
+  document.getElementById('canvas-hint').style.opacity='0';
+}
+
+let autoInterval = null;
+function toggleAuto() {
+  autoFire = !autoFire;
+  const btn = document.getElementById('btn-auto');
+  if(autoFire) {
+    btn.textContent = '⏹ Stop Auto';
+    btn.style.color = 'var(--red)';
+    btn.style.borderColor = 'rgba(255,80,80,0.4)';
+  } else {
+    btn.textContent = '▶ Auto Fire';
+    btn.style.color = '';
+    btn.style.borderColor = '';
+  }
+}
+
+function resetCoil() {
+  bolts = []; sparks = [];
+  arcCount = 0; score = 0;
+  rotor.angle = 0; rotor.speed = 0;
+  document.getElementById('score-display').textContent = '0';
+  document.getElementById('rd-arc').textContent = '0';
+  document.getElementById('canvas-hint').style.opacity = '1';
+}
+
+function updateEfficiency() {
+  const ratio = params.sturns / (params.pturns * 10);
+  const eff = Math.min(99, Math.round(50 + ratio * 0.03 + params.cap * 0.2));
+  document.getElementById('rd-eff').textContent = eff + '%';
+  document.getElementById('rd-eff').style.color = eff>80?'var(--green)':eff>60?'var(--gold)':'var(--red)';
+}
+
+// ─── PARAM UPDATE ────────────────────────────────────────────────────
+const learnTexts = {
+  voltage: `<strong>Voltage</strong> determines how far arcs travel and how intense they glow. Real Tesla coils run up to <strong>millions of volts</strong> at very low current — enough to light bulbs wirelessly but usually non-lethal.`,
+  freq: `<strong>Frequency</strong> controls how fast the capacitor charges and discharges. Higher frequencies produce tighter, hotter arcs. Tesla's coils operated at 10,000–300,000 Hz.`,
+  cap: `The <strong>capacitor</strong> stores energy like a spring. A bigger capacitor stores more charge — producing longer, more powerful arcs when the spark gap fires.`,
+  pturns: `The <strong>primary coil</strong> has few turns of thick wire. Fewer turns = lower inductance. The ratio of primary to secondary turns determines the voltage multiplication factor.`,
+  sturns: `The <strong>secondary coil</strong> has hundreds of turns of fine wire. More turns = higher voltage at the toroid. Tesla's original coils had 500–1,000 turns.`,
+  toroid: `The <strong>toroid</strong> (donut-shaped terminal) collects and emits high-voltage charge. Larger toroids store more charge before arcing, producing longer, more dramatic bolts.`,
+};
+
+function updateParam(key, val) {
+  params[key] = parseFloat(val);
+  const labels = {
+    voltage:`${val} kV`, freq:`${val} Hz`, cap:`${val} nF`,
+    pturns:val, sturns:val, toroid:val
+  };
+  document.getElementById(`lbl-${key}`).textContent = labels[key];
+  document.getElementById('rd-volt').textContent = params.voltage + 'kV';
+  document.getElementById('rd-freq').textContent = params.freq + 'Hz';
+  computeCoil();
+  if(learnTexts[key]) {
+    document.getElementById('learn-title').textContent = 'What is this?';
+    document.getElementById('learn-text').innerHTML = learnTexts[key];
+  }
+  updateEfficiency();
+}
+
+// ─── PART SELECTION ──────────────────────────────────────────────────
+const partLearn = {
+  toroid: {title:'Toroid Terminal', text:'The <strong>toroid</strong> is the top terminal of the Tesla Coil. Its smooth curved surface prevents corona discharge from the edges, concentrating charge until it arcs off into the air.'},
+  secondary: {title:'Secondary Coil', text:'The <strong>secondary coil</strong> contains hundreds of turns of fine wire and resonates at the same frequency as the primary. Resonance causes voltage to multiply to millions of volts.'},
+  primary: {title:'Primary Coil', text:'The <strong>primary coil</strong> has only a few turns of thick wire. Connected to the capacitor and spark gap, it transfers energy to the secondary through magnetic coupling.'},
+  capacitor: {title:'Capacitor (MMC)', text:'The <strong>capacitor</strong> charges from the power supply, then dumps all its energy instantly when the spark gap fires. This rapid discharge creates the oscillating current that powers the coil.'},
+  sparkgap: {title:'Spark Gap', text:'The <strong>spark gap</strong> acts as a switch. When the capacitor voltage gets high enough, air breaks down between the electrodes and the capacitor discharges violently into the primary coil.'},
+  ground: {title:'Ground Connection', text:'The <strong>ground</strong> provides the return path for high-frequency currents. Tesla believed Earth itself could act as a global conductor — the principle behind his Wardenclyffe Tower project.'},
+};
+
+function selectPart(part) {
+  selectedPart = part;
+  document.querySelectorAll('.part-item').forEach(el => el.classList.remove('selected'));
+  document.getElementById('part-'+part).classList.add('selected');
+  document.getElementById('sb-selected').textContent = 'Selected: ' + part.charAt(0).toUpperCase()+part.slice(1);
+  if(partLearn[part]) {
+    document.getElementById('learn-title').textContent = partLearn[part].title;
+    document.getElementById('learn-text').innerHTML = partLearn[part].text;
+  }
+}
+selectPart('toroid');
+
+// ─── TAB SWITCHING ───────────────────────────────────────────────────
+function switchTab(tab) {
+  currentTab = tab;
+  document.getElementById('tab-coil').classList.toggle('active', tab==='coil');
+  document.getElementById('tab-motor').classList.toggle('active', tab==='motor');
+  resetCoil();
+}
+
+// ─── MAIN LOOP ───────────────────────────────────────────────────────
+let ambientTimer = 0;
+
+function loop(ts) {
+  const dt = ts - lastTime; lastTime = ts;
+  const W=canvas.width, H=canvas.height;
+
+  ctx.clearRect(0,0,W,H);
+
+  // Background
+  ctx.fillStyle='#020408';
+  ctx.fillRect(0,0,W,H);
+  drawGrid();
+
+  if(currentTab==='coil') {
+    computeCoil();
+    drawTeslaCoil(ts);
+
+    // Auto fire
+    if(autoFire) {
+      autoTimer += dt;
+      const interval = Math.max(200, 800 - params.freq * 1.2);
+      if(autoTimer > interval) {
+        autoTimer = 0;
+        fireBolt();
+      }
+    }
+
+    // Ambient corona
+    ambientTimer += dt;
+    if(ambientTimer > 600 + Math.random()*800) {
+      ambientTimer = 0;
+      const {cx,toroidY,toroidRx,toroidRy}=coil;
+      const a=Math.random()*Math.PI*2;
+      bolts.push(new Bolt(
+        cx+Math.cos(a)*toroidRx, toroidY+Math.sin(a)*toroidRy,
+        cx+(Math.random()-0.5)*100, toroidY-30-Math.random()*60,
+        {rough:0.6,life:0.35+Math.random()*0.25,decay:0.08,w:0.6,col:'rgba(80,180,255,',branch:false}
+      ));
+    }
+
+    // Draw + update bolts
+    for(let i=bolts.length-1;i>=0;i--) {
+      bolts[i].draw(ctx); bolts[i].update();
+      if(bolts[i].dead()) bolts.splice(i,1);
+    }
+    for(let i=sparks.length-1;i>=0;i--) {
+      sparks[i].draw(ctx); sparks[i].update();
+      if(sparks[i].dead()) sparks.splice(i,1);
+    }
+
+    // Mouse hover glow
+    if(mouseOnCanvas) {
+      const g=ctx.createRadialGradient(mouseX,mouseY,0,mouseX,mouseY,50);
+      g.addColorStop(0,'rgba(0,200,255,0.1)');
+      g.addColorStop(1,'rgba(0,0,0,0)');
+      ctx.fillStyle=g;
+      ctx.beginPath(); ctx.arc(mouseX,mouseY,50,0,Math.PI*2); ctx.fill();
+    }
+
+  } else {
+    // Motor tab
+    drawMotorPreview(ts);
+    // Motor coming soon overlay at bottom
+    ctx.save();
+    ctx.fillStyle='rgba(0,0,0,0.55)';
+    ctx.fillRect(0,H-56,W,56);
+    ctx.fillStyle='rgba(155,89,245,0.9)';
+    ctx.font=`600 ${Math.max(12,W*0.022)}px Inter,sans-serif`;
+    ctx.textAlign='center';
+    ctx.fillText('AC Motor Builder — Full Interactive Version Coming Soon  •  Sign up to get notified', W/2, H-22);
+    ctx.restore();
+  }
+
+  animId = requestAnimationFrame(loop);
+}
+requestAnimationFrame(loop);
+
+// Mobile strip sync
+function updateMobileStrip(part) {
+  document.querySelectorAll('.mobile-part-btn').forEach(b => b.classList.remove('selected'));
+  const btn = document.getElementById('mob-' + part);
+  if (btn) btn.classList.add('selected');
+}
+</script>
+</body>
+</html>
