@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Disallow: /images/favicon-source.png
+
+# Sitemap
+Sitemap: https://www.forgottenwizard.com/sitemap.xml
+
+# Crawl-delay for bots
+Crawl-delay: 1
