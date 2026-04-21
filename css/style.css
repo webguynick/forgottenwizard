@@ -2994,3 +2994,68 @@ footer {
     font-size: var(--text-xl);
   }
 }
+
+/* ==============================================
+   ADA / ACCESSIBILITY ADDITIONS
+   ============================================== */
+
+/* Skip to main content link */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: var(--space-4);
+  background: var(--color-arc);
+  color: #000;
+  font-weight: 700;
+  font-size: var(--text-sm);
+  padding: var(--space-3) var(--space-5);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  z-index: 9999;
+  transition: top 0.15s;
+}
+.skip-link:focus {
+  top: var(--space-4);
+  outline: 3px solid var(--color-gold);
+  outline-offset: 2px;
+}
+
+/* Footer legal links */
+.footer__legal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-4);
+}
+.footer__legal a {
+  color: var(--color-muted);
+  font-size: var(--text-xs);
+  text-decoration: none;
+  font-family: var(--font-mono);
+  letter-spacing: 0.04em;
+  transition: color 0.15s;
+}
+.footer__legal a:hover,
+.footer__legal a:focus {
+  color: var(--color-arc);
+  text-decoration: underline;
+}
+.footer__legal span {
+  color: var(--color-border);
+  font-size: var(--text-xs);
+}
+
+/* Stronger focus rings for keyboard nav (ADA) */
+:focus-visible {
+  outline: 2px solid var(--color-arc);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+@media (max-width: 768px) {
+  .footer__legal {
+    gap: var(--space-2);
+  }
+}
