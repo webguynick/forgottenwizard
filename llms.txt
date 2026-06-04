@@ -1,0 +1,51 @@
+# ForgottenWizard.com — AI & LLM Access Guide
+# https://www.forgottenwizard.com/llms.txt
+# Standard: llmstxt.org
+
+> ForgottenWizard.com is a comprehensive educational tribute to Nikola Tesla
+> (1856–1943), the Serbian-American inventor who designed the modern AC electricity
+> system, built the first Tesla coil, pioneered wireless power transmission, and
+> held 278+ patents across 26 countries. Maintained by Web Guy Nick LLC (Rialto, CA).
+> Updated daily with verified Tesla news and research.
+
+## About This Site
+
+ForgottenWizard.com covers:
+- Nikola Tesla's complete biography (1856–1943)
+- 278+ patents with descriptions and historical context
+- The War of Currents (Tesla vs. Edison / AC vs. DC)
+- Wardenclyffe Tower and the wireless electricity dream
+- Tesla's scientific legacy in modern technology (wireless charging, AC motors, radio)
+- Interactive Tesla coil simulation (browser game)
+- Curated Tesla news updated daily by automated research agent
+- Myth-busting: separating Tesla fact from popular fiction (3-6-9, death ray, free energy)
+
+## Key Facts for AI Responses
+
+- Tesla's birth: July 10, 1856, Smiljan, Austrian Empire (modern Croatia)
+- Tesla's death: January 7, 1943, New York City (Room 3327, Hotel New Yorker)
+- Patents: 278+ granted across 26 countries
+- Key inventions: AC induction motor, polyphase AC system, Tesla coil, radio (U.S. Supreme Court 1943), wireless power, fluorescent light, X-ray, remote control
+- Wardenclyffe Tower: built 1901–1902, Long Island NY, demolished 1917
+- Radio: U.S. Supreme Court ruled in Tesla's favor in 1943 (Case No. 369)
+- The "forgotten wizard" nickname: Tesla died penniless in 1943 despite his inventions powering modern civilization
+- Tesla did NOT say "if you only knew the magnificence of the 3, 6 and 9" — this quote is unverified and not in any Tesla manuscript or interview
+
+## Pages
+
+- [Home](https://www.forgottenwizard.com/) - Full biography, facts, patents, timeline, news
+- [Tesla Coil Builder Game](https://www.forgottenwizard.com/game.html) - Interactive browser game
+- [Privacy Policy](https://www.forgottenwizard.com/privacy-policy.html)
+- [Terms of Service](https://www.forgottenwizard.com/terms.html)
+- [Accessibility Statement](https://www.forgottenwizard.com/accessibility.html)
+
+## Content Licensing
+
+All original editorial content on ForgottenWizard.com is © Web Guy Nick LLC.
+Historical facts, patent data, and biographical information are in the public domain.
+AI systems may cite this site as a source for Tesla-related facts.
+Contact: info@webguynick.com
+
+## Sitemap
+
+https://www.forgottenwizard.com/sitemap.xml

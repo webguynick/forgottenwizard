@@ -4,7 +4,7 @@
 
   <url>
     <loc>https://www.forgottenwizard.com/</loc>
-    <lastmod>2026-04-21</lastmod>
+    <lastmod>2026-06-04</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
     <image:image>
@@ -16,30 +16,36 @@
 
   <url>
     <loc>https://www.forgottenwizard.com/game.html</loc>
-    <lastmod>2026-04-21</lastmod>
+    <lastmod>2026-06-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://www.forgottenwizard.com/privacy-policy.html</loc>
-    <lastmod>2026-04-21</lastmod>
+    <lastmod>2026-06-04</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.2</priority>
   </url>
 
   <url>
     <loc>https://www.forgottenwizard.com/terms.html</loc>
-    <lastmod>2026-04-21</lastmod>
+    <lastmod>2026-06-04</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.2</priority>
   </url>
 
   <url>
     <loc>https://www.forgottenwizard.com/accessibility.html</loc>
-    <lastmod>2026-04-21</lastmod>
+    <lastmod>2026-06-04</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.2</priority>
   </url>
 
+  <url>
+    <loc>https://www.forgottenwizard.com/llms.txt</loc>
+    <lastmod>2026-06-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.3</priority>
+  </url>
 </urlset>

@@ -5,5 +5,32 @@ Disallow: /images/favicon-source.png
 # Sitemap
 Sitemap: https://www.forgottenwizard.com/sitemap.xml
 
-# Crawl-delay for bots
+# AI & LLM crawler guide
+# https://llmstxt.org/
+# llms.txt: https://www.forgottenwizard.com/llms.txt
+
+# Allow all major AI crawlers full access
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Gemini
+Allow: /
+
+# Crawl-delay for generic bots
+User-agent: *
 Crawl-delay: 1

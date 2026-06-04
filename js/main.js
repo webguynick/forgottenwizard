@@ -143,29 +143,24 @@
     });
   }
 
-  // ─── Nav scroll state ──────────────────────────────────────────────
+  // ─── Nav scroll state (RAF-throttled, passive) ───────────────────
   const nav = document.querySelector('.nav');
+  let navTicking = false;
   window.addEventListener('scroll', () => {
-    if (nav) {
-      nav.style.background = window.scrollY > 50
-        ? 'rgba(5,5,8,0.97)'
-        : 'linear-gradient(to bottom, rgba(5,5,8,0.95), rgba(5,5,8,0))';
+    if (!navTicking) {
+      navTicking = true;
+      requestAnimationFrame(() => {
+        if (nav) {
+          nav.style.background = window.scrollY > 50
+            ? 'rgba(5,5,8,0.97)'
+            : 'linear-gradient(to bottom, rgba(5,5,8,0.95), rgba(5,5,8,0))';
+        }
+        navTicking = false;
+      });
     }
-  });
+  }, { passive: true });
 
-  // ─── Canvas resize on scroll height change ────────────────────────
-  let prevHeight = document.documentElement.scrollHeight;
-  setInterval(() => {
-    const h = document.documentElement.scrollHeight;
-    if (h !== prevHeight) {
-      prevHeight = h;
-      const lc = document.getElementById('lightning-canvas');
-      if (lc) {
-        lc.height = h;
-        lc.style.height = h + 'px';
-      }
-    }
-  }, 500);
+  // Canvas is now viewport-sized (lightning.js v2) — no setInterval needed
 
 })();
 
@@ -185,25 +180,19 @@
 })();
 
 // ─── IntersectionObserver for .fade-in elements ─────────────────────
+// Transitions are in CSS (.fade-in / .fade-in.is-visible) — no inline styles
 (function() {
   if (!('IntersectionObserver' in window)) return;
   const fadeEls = document.querySelectorAll('.fade-in');
   const obs = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        entry.target.style.opacity = '1';
-        entry.target.style.transform = 'translateY(0)';
+        entry.target.classList.add('is-visible');
         obs.unobserve(entry.target);
       }
     });
   }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-
-  fadeEls.forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(24px)';
-    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-    obs.observe(el);
-  });
+  fadeEls.forEach(el => obs.observe(el));
 })();
 
 // ─── FAQ smooth open animation ──────────────────────────────────────

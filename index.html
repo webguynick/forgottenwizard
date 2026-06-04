@@ -55,7 +55,7 @@
         "@id": "https://www.forgottenwizard.com/#webpage",
         "url": "https://www.forgottenwizard.com/",
         "name": "Nikola Tesla — The Forgotten Wizard | Facts, Inventions & Legacy",
-        "description": "Discover Nikola Tesla — inventor of AC electricity, Tesla coil, wireless power, and radio. Interactive facts, 278 patents, biography, timeline, and free browser game.",
+        "description": "Discover Nikola Tesla — the Serbian-American inventor of AC electricity, the Tesla coil, wireless power transmission, and radio. Explore 278 patents, interactive experiments, a full biography, historical timeline, and a free browser game. Updated daily with Tesla news.",
         "isPartOf": { "@id": "https://www.forgottenwizard.com/#website" },
         "about": { "@id": "https://www.forgottenwizard.com/#tesla" },
         "primaryImageOfPage": {
@@ -64,7 +64,11 @@
           "width": 1200,
           "height": 630
         },
-        "dateModified": "2026-04-21",
+        "dateModified": "2026-06-04",
+        "speakable": {
+          "@type": "SpeakableSpecification",
+          "cssSelector": [".hero__title", ".hero__subtitle", ".fact-card__text", ".news-card__excerpt", ".faq-item__a"]
+        },
         "breadcrumb": {
           "@type": "BreadcrumbList",
           "itemListElement": [
@@ -76,7 +80,7 @@
         "@type": "Person",
         "@id": "https://www.forgottenwizard.com/#tesla",
         "name": "Nikola Tesla",
-        "alternateName": ["The Forgotten Wizard", "The Wizard of Menlo Park", "Tesla"],
+        "alternateName": ["The Forgotten Wizard", "The Master of Lightning", "Tesla"],
         "birthDate": "1856-07-10",
         "deathDate": "1943-01-07",
         "birthPlace": { "@type": "Place", "name": "Smiljan, Austrian Empire (modern-day Croatia)" },
@@ -86,13 +90,30 @@
           { "@type": "Country", "name": "United States" }
         ],
         "jobTitle": ["Inventor", "Electrical Engineer", "Mechanical Engineer", "Futurist"],
-        "description": "Nikola Tesla was a Serbian-American inventor, electrical engineer, mechanical engineer, and futurist best known for his contributions to the design of the modern alternating current (AC) electricity supply system. He held 278+ patents across 26 countries.",
-        "knowsAbout": ["Alternating Current", "Tesla Coil", "Wireless Electricity", "Radio Transmission", "Rotating Magnetic Field", "AC Induction Motor", "Wardenclyffe Tower", "X-ray", "Remote Control"],
+        "description": "Nikola Tesla (July 10, 1856 – January 7, 1943) was a Serbian-American inventor and electrical engineer who designed the modern alternating current (AC) power system used worldwide. He held 278+ patents across 26 countries covering AC motors, the Tesla coil, radio transmission, wireless energy transfer, fluorescent lighting, X-ray devices, and remote control. Despite powering the modern world, Tesla died in poverty and obscurity — earning the nickname The Forgotten Wizard.",
+        "knowsAbout": ["Alternating Current", "Tesla Coil", "Wireless Electricity", "Radio Transmission", "Rotating Magnetic Field", "AC Induction Motor", "Wardenclyffe Tower", "X-ray", "Remote Control", "Polyphase System", "Fluorescent Lighting", "Power Beaming"],
+        "award": ["Edison Medal (1916)", "Order of the White Eagle", "Order of St. Sava"],
         "sameAs": [
           "https://en.wikipedia.org/wiki/Nikola_Tesla",
           "https://www.britannica.com/biography/Nikola-Tesla",
-          "https://www.smithsonianmag.com/category/nikola-tesla/"
+          "https://www.smithsonianmag.com/category/nikola-tesla/",
+          "https://www.pbs.org/tesla/",
+          "https://teslaresearchlibrary.com/"
         ]
+      },
+      {
+        "@type": "Article",
+        "@id": "https://www.forgottenwizard.com/#article",
+        "headline": "Nikola Tesla: The Forgotten Wizard Who Powered the Modern World",
+        "description": "A comprehensive educational resource about Nikola Tesla — his life, patents, inventions, and enduring scientific legacy. Includes interactive Tesla coil simulation, patent explorer, historical timeline, and curated Tesla news updated daily.",
+        "author": { "@type": "Organization", "name": "Web Guy Nick LLC" },
+        "publisher": { "@type": "Organization", "name": "Web Guy Nick LLC", "email": "info@webguynick.com" },
+        "datePublished": "2025-01-01",
+        "dateModified": "2026-06-04",
+        "about": { "@id": "https://www.forgottenwizard.com/#tesla" },
+        "image": "https://www.forgottenwizard.com/images/og-image-final.png",
+        "mainEntityOfPage": "https://www.forgottenwizard.com/",
+        "keywords": "Nikola Tesla, Tesla inventions, AC electricity, Tesla coil, wireless power, Tesla patents, War of Currents, Wardenclyffe Tower"
       },
       {
         "@type": "FAQPage",
@@ -116,6 +137,16 @@
             "@type": "Question",
             "name": "How many patents did Nikola Tesla have?",
             "acceptedAnswer": { "@type": "Answer", "text": "Nikola Tesla was granted 278+ patents in 26 countries throughout his lifetime, covering inventions in AC electricity, radio, motors, generators, turbines, and wireless energy transmission." }
+          },
+          {
+            "@type": "Question",
+            "name": "Is wireless charging based on Tesla's work?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Yes. The resonant electromagnetic coupling principle behind modern wireless charging (Qi standard, wireless earbuds, etc.) is directly descended from Tesla's 1891 experiments at Columbia College, where he lit lamps wirelessly using high-frequency resonant coils." }
+          },
+          {
+            "@type": "Question",
+            "name": "What was Tesla's greatest unfulfilled project?",
+            "acceptedAnswer": { "@type": "Answer", "text": "Wardenclyffe Tower, built on Long Island 1901–1902 and funded by J.P. Morgan, was Tesla's most ambitious project: a 187-foot tower designed to transmit electricity and communications wirelessly around the globe. Funding collapsed in 1906 and the tower was demolished in 1917." }
           }
         ]
       }
