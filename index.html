@@ -64,7 +64,7 @@
           "width": 1200,
           "height": 630
         },
-        "dateModified": "2026-06-08",
+        "dateModified": "2026-06-11",
         "speakable": {
           "@type": "SpeakableSpecification",
           "cssSelector": [".hero__title", ".hero__subtitle", ".fact-card__text", ".news-card__excerpt", ".faq-item__a"]
@@ -109,7 +109,7 @@
         "author": { "@type": "Organization", "name": "Web Guy Nick LLC" },
         "publisher": { "@type": "Organization", "name": "Web Guy Nick LLC", "email": "info@webguynick.com" },
         "datePublished": "2025-01-01",
-        "dateModified": "2026-06-08",
+        "dateModified": "2026-06-11",
         "about": { "@id": "https://www.forgottenwizard.com/#tesla" },
         "image": "https://www.forgottenwizard.com/images/og-image-final.png",
         "mainEntityOfPage": "https://www.forgottenwizard.com/",
@@ -901,7 +901,18 @@
 </div>
 <!-- BLOG POSTS GRID -->
 <div class="news-grid" id="news-grid">
-<article class="news-card news-card--featured fade-in" itemscope itemtype="https://schema.org/BlogPosting">
+        <article class="news-card news-card--featured fade-in" itemscope itemtype="https://schema.org/BlogPosting">
+          <div class="news-card__label news-card__label--hot">🔴 Latest</div>
+          <h3 class="news-card__title" itemprop="headline">New June 2026 documentary captures what made Tesla impossible to forget — and impossible to fund</h3>
+          <p class="news-card__meta"><time datetime="2026-06">June 2026</time> · 4 min read</p>
+          <p class="news-card__excerpt" itemprop="description">"Nikola Tesla: The Genius No One Understood," published June 1, 2026 by the YouTube channel Stories From the Past, takes a deliberately cinematic approach to Tesla's life — slow narration, atmospheric sound design, and a through-line that connects his childhood thunderstorm fascinations in Smiljan to his lonely final years in Room 3327 of the Hotel New Yorker. What makes the documentary stand out is its focus on the structural reasons Tesla kept losing — not just Edison's tactics, but Tesla's own compulsive perfectionism, his inability to commercialize, and his trust in backers like J.P. Morgan who ultimately prioritized profit over vision. It's a story about what the world does to people who see too far ahead, and it's one of the more honest retellings of Tesla's arc to come out in 2026.</p>
+          <div class="news-card__tags">
+            <span class="news-tag">Documentary</span>
+            <span class="news-tag">June 2026</span>
+            <span class="news-tag">Biography</span>
+          </div>
+        </article>
+<article class="news-card fade-in" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="news-card__label news-card__label--hot">🔴 Latest</div>
   <h3 class="news-card__title" itemprop="headline">Myth vs. man: A May 2026 video challenges the “Tesla conspiracy” story — and explains what was actually taken after his death</h3>
   <p class="news-card__meta"><time datetime="2026-06">June 2026</time> · 4 min read</p>
@@ -980,27 +991,29 @@
 <span class="news-tag">Myth vs Fact</span>
 </div>
 </article>
-<article class="news-card fade-in" itemscope="" itemtype="https://schema.org/BlogPosting">
-<div class="news-card__label">Previous Latest</div>
-<h3 class="news-card__title" itemprop="headline">NTT and Mitsubishi Heavy Industries set a laser wireless-power record: 152 W delivered over 1 km</h3>
-<p class="news-card__meta"><time datetime="2026-05">May 2026</time> · 4 min read</p>
-<p class="news-card__excerpt" itemprop="description">A team at NTT and Mitsubishi Heavy Industries (MHI) reported a real-world laser wireless power demonstration at Nanki-Shirahama Airport in Wakayama Prefecture, Japan. They transmitted just over a kilowatt of laser power across one kilometer and converted it into 152 watts of usable electricity at the receiver—about 15% end-to-end efficiency. The test reportedly ran for 30 minutes continuously, a key milestone because outdoor air turbulence can distort a laser beam and reduce performance. It’s a modern, engineering-grounded echo of Nikola Tesla’s century-old dream of sending power through the air—now aimed at practical uses like powering remote sensors and emergency deployments.</p>
-<div class="news-card__tags">
-<span class="news-tag">Wireless Power</span>
-<span class="news-tag">Laser Energy</span>
-<span class="news-tag">Modern Research</span>
-</div>
-</article>
-
-
-
 
 </div><!-- /news-grid -->
 <!-- YOUTUBE VIDEO SECTION -->
 <div class="video-section">
 <h3 class="video-section__title">Watch: Tesla Documentaries &amp; Discoveries</h3>
 <p class="video-section__sub">The best Tesla content on the web — curated for the true believer.</p>
-<div class="video-grid" id="video-grid"><div class="video-card fade-in">
+<div class="video-grid" id="video-grid">
+          <div class="video-card fade-in">
+            <div class="video-card__embed">
+              <iframe
+                src="https://www.youtube.com/embed/ynpSJQ5YZCw"
+                title="Nikola Tesla: The Genius No One Understood"
+                loading="lazy"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+            </div>
+            <div class="video-card__info">
+              <span class="video-card__badge">Documentary</span>
+              <h4 class="video-card__title">The Genius No One Understood</h4>
+              <p class="video-card__desc">A cinematic retelling of Tesla's life — from Smiljan to the Hotel New Yorker — and why the world kept failing him.</p>
+            </div>
+          </div>
+<div class="video-card fade-in">
   <div class="video-card__embed">
     <iframe
       src="https://www.youtube.com/embed/gRpT_XqDGLU"
@@ -1069,19 +1082,8 @@
 <p class="video-card__desc">A 2026 mini-documentary connecting Tesla’s high-voltage experiments to Wardenclyffe and wireless power.</p>
 </div>
 </div>
-<div class="video-card fade-in">
-<div class="video-card__embed">
-<iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" loading="lazy" src="https://www.youtube.com/embed/JyHbuMYJ8EQ" title="Nikola Tesla: Genius or Mad Scientist ?"></iframe>
-</div>
-<div class="video-card__info">
-<span class="video-card__badge">Documentary</span>
-<h4 class="video-card__title">Genius or mad scientist?</h4>
-<p class="video-card__desc">A 49-minute 2026 biography documentary from The History Profile.</p>
-</div>
-</div>
 
-</div>
-</div><!-- /video-grid -->
+          </div><!-- /video-grid -->
 </div><!-- /video-section -->
 </div>
 </section>
